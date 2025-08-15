@@ -370,8 +370,28 @@ TF.Error = class extends Error {
     }
 }
 
+TF.Colour = class {
+    constructor(s) {
+        this.name = s.name;
+        this.hex = s.hex;
+    }
+}
+
+TF.Sound = class {}
+
 class RaycastEmitter {
-    static emit(s) {}
+    static emit(s) {
+        const x = s.x;
+        const y = s.y;
+        const z = s.z;
+        const radius = s.radius;
+        const ignore = s.ignore;
+        const channel = s.channel;
+        const visibility = s.visibility;
+        const colour = s.colour;
+        const hitcount = s.hitcount;
+        let hits = [];
+    }
 }
 class ParticleEmitter {
     static emit(s) {}
@@ -380,9 +400,13 @@ class SoundEmitter {
     static emit(s) {
         const sound = s.sound;
         const volume = s.volume;
+        const channel = s.channel;
         if(s.emitstyle == "comp") {
             const comp = s.comp;
             const bone = s.bone;
+            const offsetx = s.boneoffsetx ?? 0;
+            const offsety = s.boneoffsety ?? 0;
+            const offsetz = s.boneoffsetz ?? 0;
         } else if(s.emitstyle == "spatial") {
             const x = s.x;
             const y = s.y;
