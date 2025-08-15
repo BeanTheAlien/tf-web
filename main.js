@@ -17,7 +17,9 @@ TF.Merc = class {
     constructor(s) {
         this.name = s.name;
         this.mdl = s.mdl;
-        this.kit = s.kit;
+        this.primary = new s.kit.primary;
+        this.secondary = new s.kit.secondary;
+        this.melee = new s.kit.melee;
         this.x = s.x;
         this.y = s.y;
         this.z = s.z;
@@ -56,7 +58,7 @@ TF.Merc.Soldier = class extends TF.Merc {
         super({
             "name": "Soldier",
             "mdl": null,
-            "kit": { "primary": null, "secondary": null, "melee": null },
+            "kit": { "primary": TF.Weapon.RocketLauncher, "secondary": TF.Weapon.Shotgun, "melee": TF.Weapon.RocketLauncher },
             "x": s.x,
             "y": s.y,
             "z": s.z,
@@ -377,31 +379,29 @@ TF.Projectile.Rocket = class extends TF.Projectile {
     constructor(s) {
         super({
             "name": "Rocket",
-            "collide": () => {
+            "collide": (loc) => {
                 new TF.Env.Explosion();
             },
             "update": () => {
-                /*
-                     const mesh1 = scene.getMeshByName("mesh1");
-     const mesh2 = scene.getMeshByName("mesh2");
-     const collisionInfo = mesh1.intersectsMesh(mesh2, true);
-     if (collisionInfo.hit) {
-         const collisionPoint = collisionInfo.getIntersectionPoint();
-         // Use collisionPoint (a Vector3)
-     }
+                // Get the mesh for this rocket
+                const rocketMesh = scene.getMeshByName("RocketMesh_" + this.id); // however you track meshes
 
+                if (!rocketMesh) return;
 
-     const playerBody = mesh.getPhysicsBody();
-     playerBody.setCollisionCallbackEnabled(true);
-     const observable = playerBody.getCollisionObservable();
-     const observer = observable.add((collisionEvent) => {
-         if (collisionEvent.collider === playerBody || collisionEvent.collidedAgainst === playerBody) {
-             const collisionPoint = collisionEvent.collisionPoint;
-             // Use collisionPoint (a Vector3)
-         }
-     });
+                // Move forward in the rocket's local forward direction
+                const forward = rocketMesh.forward; // Babylon local forward vector
+                rocketMesh.position.addInPlace(forward.scale(this.speed));
 
-                */ 
+                // Check collisions with enemies or walls
+                for (let target of scene.meshes) {
+                    const collision = rocketMesh.intersectsMesh(target, true);
+                    if (target.name.startsWith("Enemy") && collision.hit) {
+                        const col = collision.getIntersectionPoint();
+                        this.collide(col);
+                        rocketMesh.dispose();
+                        break;
+                    }
+                }
             },
             "reflectable": true,
             "mdl": null,
