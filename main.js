@@ -360,14 +360,17 @@ TF.Projectile = class {
         this.x = s.x;
         this.y = s.y;
         this.z = s.z;
-        this.xdirec = s.xdirec;
-        this.ydirec = s.ydirec;
-        this.zdirec = s.zdirec;
+        this.xrot = s.xrot;
+        this.yrot = s.yrot;
+        this.zrot = s.zrot;
         this.sizex = s.sizex;
         this.sizey = s.sizey;
         this.sizez = s.sizez;
         this.speed = s.speed;
         this.lifespan = s.lifespan;
+    }
+    tick() {
+        this.update();
     }
 }
 TF.Projectile.Rocket = class extends TF.Projectile {
@@ -382,9 +385,9 @@ TF.Projectile.Rocket = class extends TF.Projectile {
             "x": s.x,
             "y": s.y,
             "z": s.z,
-            "xdirec": s.xdirec,
-            "ydirec": s.ydirec,
-            "zdirec": s.zdirec,
+            "xrot": s.xrot,
+            "yrot": s.yrot,
+            "zrot": s.zrot,
             "sizex": 5,
             "sizey": 5,
             "sizez": 5,
@@ -405,9 +408,9 @@ TF.Projectile.Fire = class extends TF.Projectile {
             "x": s.x,
             "y": s.y,
             "z": s.z,
-            "xdirec": s.xdirec,
-            "ydirec": s.ydirec,
-            "zdirec": s.zdirec,
+            "xrot": s.xrot,
+            "yrot": s.yrot,
+            "zrot": s.zrot,
             "sizex": 1,
             "sizey": 1,
             "sizez": 1,
@@ -428,9 +431,9 @@ TF.Projectile.Airblast = class extends TF.Projectile {
             "x": s.x,
             "y": s.y,
             "z": s.z,
-            "xdirec": s.xdirec,
-            "ydirec": s.ydirec,
-            "zdirec": s.zdirec,
+            "xrot": s.xrot,
+            "yrot": s.yrot,
+            "zrot": s.zrot,
             "sizex": 5,
             "sizey": 5,
             "sizez": 2,
@@ -536,6 +539,7 @@ const canvas = document.getElementById('gameCanvas');
 
 function game() {
     camera.position.copyFrom(player.mesh.position);
+    projectiles.forEach(p => p.tick());
     scene.render();
 }
 
@@ -577,6 +581,8 @@ player.isGrounded = false;
 player.mesh.physicsImpostor.registerOnPhysicsCollide(ground.physicsImpostor, function() {
     player.isGrounded = true; // Allow jumping when on the ground
 });
+
+var projectiles = [];
 
 // Lock Pointer
 function Lock() {
