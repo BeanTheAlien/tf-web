@@ -377,8 +377,32 @@ TF.Projectile.Rocket = class extends TF.Projectile {
     constructor(s) {
         super({
             "name": "Rocket",
-            "collide": () => {},
-            "update": () => {},
+            "collide": () => {
+                new TF.Env.Explosion();
+            },
+            "update": () => {
+                /*
+                     const mesh1 = scene.getMeshByName("mesh1");
+     const mesh2 = scene.getMeshByName("mesh2");
+     const collisionInfo = mesh1.intersectsMesh(mesh2, true);
+     if (collisionInfo.hit) {
+         const collisionPoint = collisionInfo.getIntersectionPoint();
+         // Use collisionPoint (a Vector3)
+     }
+
+
+     const playerBody = mesh.getPhysicsBody();
+     playerBody.setCollisionCallbackEnabled(true);
+     const observable = playerBody.getCollisionObservable();
+     const observer = observable.add((collisionEvent) => {
+         if (collisionEvent.collider === playerBody || collisionEvent.collidedAgainst === playerBody) {
+             const collisionPoint = collisionEvent.collisionPoint;
+             // Use collisionPoint (a Vector3)
+         }
+     });
+
+                */ 
+            },
             "reflectable": true,
             "mdl": null,
             "texture": null,
@@ -555,10 +579,10 @@ camera.attachControl(canvas, true);
 camera.angularSensibility = 4000;  // Slow down camera rotation
 
 // Create entities
-const player = new TF.Merc.Heavy({ "x": 0, "y": 0, "z": 0 });
+const player = new TF.Merc.Soldier({ "x": 0, "y": 0, "z": 0 });
 // Fire when left mouse button is clicked
-//function Shoot() { gun.shoot(); }
-//document.addEventListener("mousedown", Shoot);
+function Shoot() { player.atk1(); }
+document.addEventListener("mousedown", Shoot);
 
 player.mesh = BABYLON.MeshBuilder.CreateCapsule("player", { height: 2, radius: 0.5 }, scene);
 player.mesh.position = new BABYLON.Vector3(0, 5, 0);
