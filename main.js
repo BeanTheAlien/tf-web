@@ -372,14 +372,12 @@ TF.Projectile = class {
         this.lifespan = s.lifespan;
         this.mesh = BABYLON.MeshBuilder.CreateCapsule("rocket", { height: 1 }, scene);
         this.mesh.position = new BABYLON.Vector3(this.x, this.y, this.z);
-        player.mesh = BABYLON.MeshBuilder.CreateCapsule("player", { height: 2, radius: 0.5 }, scene);
-player.mesh.position = new BABYLON.Vector3(0, 5, 0);
-player.mesh.physicsImpostor = new BABYLON.PhysicsImpostor(
-    player.mesh,
-    BABYLON.PhysicsImpostor.BoxImpostor,
-    { mass: 1, restitution: 0.1 },
-    scene
-);
+        this.mesh.physicsImpostor = new BABYLON.PhysicsImpostor(
+            this.mesh,
+            BABYLON.PhysicsImpostor.BoxImpostor,
+            { mass: 1, restitution: 0.1 },
+            scene
+        );
     }
     tick() {
         this.update();
