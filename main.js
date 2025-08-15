@@ -370,6 +370,16 @@ TF.Projectile = class {
         this.sizez = s.sizez;
         this.speed = s.speed;
         this.lifespan = s.lifespan;
+        this.mesh = BABYLON.MeshBuilder.CreateCapsule("rocket", { height: 1 }, scene);
+        this.mesh.position = new BABYLON.Vector3(this.x, this.y, this.z);
+        player.mesh = BABYLON.MeshBuilder.CreateCapsule("player", { height: 2, radius: 0.5 }, scene);
+player.mesh.position = new BABYLON.Vector3(0, 5, 0);
+player.mesh.physicsImpostor = new BABYLON.PhysicsImpostor(
+    player.mesh,
+    BABYLON.PhysicsImpostor.BoxImpostor,
+    { mass: 1, restitution: 0.1 },
+    scene
+);
     }
     tick() {
         this.update();
@@ -380,7 +390,7 @@ TF.Projectile.Rocket = class extends TF.Projectile {
         super({
             "name": "Rocket",
             "collide": (loc) => {
-                new TF.Env.Explosion();
+                new TF.Env.Explosion(loc[0], loc[1], loc[2]);
             },
             "update": () => {
                 // Get the mesh for this rocket
@@ -393,9 +403,9 @@ TF.Projectile.Rocket = class extends TF.Projectile {
                 rocketMesh.position.addInPlace(forward.scale(this.speed));
 
                 // Check collisions with enemies or walls
-                for (let target of scene.meshes) {
+                for(let target of scene.meshes) {
                     const collision = rocketMesh.intersectsMesh(target, true);
-                    if (target.name.startsWith("Enemy") && collision.hit) {
+                    if(collision.hit) {
                         const col = collision.getIntersectionPoint();
                         this.collide(col);
                         rocketMesh.dispose();
