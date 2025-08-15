@@ -378,11 +378,15 @@ class ParticleEmitter {
 }
 class SoundEmitter {
     static emit(s) {
+        const sound = s.sound;
+        const volume = s.volume;
         if(s.emitstyle == "comp") {
             const comp = s.comp;
             const bone = s.bone;
         } else if(s.emitstyle == "spatial") {
-            //
+            const x = s.x;
+            const y = s.y;
+            const z = s.z;
         }
     }
 }
