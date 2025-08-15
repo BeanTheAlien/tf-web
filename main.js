@@ -185,10 +185,16 @@ TF.Weapon.Scattergun = class extends TF.Weapon {
 TF.Weapon.RocketLauncher = class extends TF.Weapon {
     constructor() {
         super({
-            "name": "",
+            "name": "Rocket Launcher",
             "mdl": null,
             "atkdelay": 0,
-            "attack": () => {},
+            "attack": () => {
+                if(this.shells > 0) {
+                    new TF.Projectile.Rocket(0, 0, 0);
+                } else {
+                    //
+                }
+            },
             "attackfailsound": null
         });
         this.shells = 4;
@@ -201,8 +207,6 @@ TF.Weapon.Flamethrower = class extends TF.Weapon {
         super({
             "name": "",
             "mdl": null,
-            "shells": 0,
-            "ammo": 0,
             "atkdelay": 0,
             "attack": () => {},
             "attackfailsound": null
@@ -215,8 +219,6 @@ TF.Weapon.GrenadeLauncher = class extends TF.Weapon {
         super({
             "name": "",
             "mdl": null,
-            "shells": 0,
-            "ammo": 0,
             "atkdelay": 0,
             "attack": () => {},
             "attackfailsound": null
@@ -231,8 +233,6 @@ TF.Weapon.Minigun = class extends TF.Weapon {
         super({
             "name": "",
             "mdl": null,
-            "shells": 0,
-            "ammo": 0,
             "atkdelay": 0,
             "attack": () => {},
             "attackfailsound": null
@@ -245,8 +245,6 @@ TF.Weapon.Shotgun = class extends TF.Weapon {
         super({
             "name": "",
             "mdl": null,
-            "shells": 0,
-            "ammo": 0,
             "atkdelay": 0,
             "attack": () => {},
             "attackfailsound": null
@@ -261,8 +259,6 @@ TF.Weapon.SyringeGun = class extends TF.Weapon {
         super({
             "name": "",
             "mdl": null,
-            "shells": 0,
-            "ammo": 0,
             "atkdelay": 0,
             "attack": () => {},
             "attackfailsound": null
@@ -277,8 +273,6 @@ TF.Weapon.SniperRifle = class extends TF.Weapon {
         super({
             "name": "",
             "mdl": null,
-            "shells": 0,
-            "ammo": 0,
             "atkdelay": 0,
             "attack": () => {},
             "attackfailsound": null
@@ -291,8 +285,6 @@ TF.Weapon.Revolver = class extends TF.Weapon {
         super({
             "name": "",
             "mdl": null,
-            "shells": 0,
-            "ammo": 0,
             "atkdelay": 0,
             "attack": () => {},
             "attackfailsound": null
@@ -309,6 +301,7 @@ TF.Env = class {
         this.onsummon = s.onsummon;
         this.onexpire = s.onexpire;
         this.ontouched = s.ontouched;
+        this.lifespan = s.lifespan;
         this.mdl = s.mdl;
         this.texture = s.texture;
         this.x = s.x;
@@ -323,6 +316,7 @@ TF.Env.Explosion = class extends TF.Env {
             "onsummon": () => {},
             "onexpire": () => {},
             "ontouched": () => {},
+            "lifespan": 0.5,
             "mdl": null,
             "texture": null,
             "x": s.x,
@@ -332,12 +326,62 @@ TF.Env.Explosion = class extends TF.Env {
     }
 }
 
+TF.Projectile = class {
+    constructor(s) {
+        this.name = s.name;
+        this.collide = s.collide;
+        this.mdl = s.mdl;
+        this.texture = s.texture;
+        this.x = s.x;
+        this.y = s.y;
+        this.z = s.z;
+        this.sizex = s.sizex;
+        this.sizey = s.sizey;
+        this.sizez = s.sizez;
+        this.speed = s.speed;
+    }
+}
+TF.Projectile.Rocket = class extends TF.Projectile {
+    constructor(s) {
+        super({
+            "name": "",
+            "collide": () => {},
+            "mdl": null,
+            "texture": null,
+            "x": s.x,
+            "y": s.y,
+            "z": s.z,
+            "sizex": 5,
+            "sizey": 5,
+            "sizez": 5,
+            "speed": 1
+        });
+    }
+}
+
 TF.ScreenComponent = class {}
 TF.ScreenComponent.Text = class extends TF.ScreenComponent {}
 TF.ScreenComponent.Rect = class extends TF.ScreenComponent {}
 
-class RaycastEmitter {}
-class ParticleEmitter {}
+TF.Error = class extends Error {}
+
+
+class RaycastEmitter {
+    static emit(s) {}
+}
+class ParticleEmitter {
+    static emit(s) {}
+}
+class SoundEmitter {
+    static emit(s) {
+        if(s.emitstyle == "comp") {
+            const comp = s.comp;
+            const bone = s.bone;
+        } else if(s.emitstyle == "spatial") {
+            //
+        }
+    }
+}
 
 class Camera {}
 
