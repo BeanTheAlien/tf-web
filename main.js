@@ -360,6 +360,9 @@ TF.Projectile = class {
         this.x = s.x;
         this.y = s.y;
         this.z = s.z;
+        this.xdirec = s.xdirec;
+        this.ydirec = s.ydirec;
+        this.zdirec = s.zdirec;
         this.sizex = s.sizex;
         this.sizey = s.sizey;
         this.sizez = s.sizez;
@@ -379,6 +382,9 @@ TF.Projectile.Rocket = class extends TF.Projectile {
             "x": s.x,
             "y": s.y,
             "z": s.z,
+            "xdirec": s.xdirec,
+            "ydirec": s.ydirec,
+            "zdirec": s.zdirec,
             "sizex": 5,
             "sizey": 5,
             "sizez": 5,
@@ -399,6 +405,9 @@ TF.Projectile.Fire = class extends TF.Projectile {
             "x": s.x,
             "y": s.y,
             "z": s.z,
+            "xdirec": s.xdirec,
+            "ydirec": s.ydirec,
+            "zdirec": s.zdirec,
             "sizex": 1,
             "sizey": 1,
             "sizez": 1,
@@ -419,6 +428,9 @@ TF.Projectile.Airblast = class extends TF.Projectile {
             "x": s.x,
             "y": s.y,
             "z": s.z,
+            "xdirec": s.xdirec,
+            "ydirec": s.ydirec,
+            "zdirec": s.zdirec,
             "sizex": 5,
             "sizey": 5,
             "sizez": 2,
