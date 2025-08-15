@@ -363,8 +363,12 @@ TF.ScreenComponent = class {}
 TF.ScreenComponent.Text = class extends TF.ScreenComponent {}
 TF.ScreenComponent.Rect = class extends TF.ScreenComponent {}
 
-TF.Error = class extends Error {}
-
+TF.Error = class extends Error {
+    constructor(s) {
+        this.name = s.name;
+        this.message = s.message;
+    }
+}
 
 class RaycastEmitter {
     static emit(s) {}
