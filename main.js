@@ -1,7 +1,15 @@
+/*
+--- Game Modes ---
+Casual (AI) => Use AI controlled mercs (1 AI per class, player takes class slot).
+Casual (Online) => Use an online build (unlimited per class). Server player limit 24.
+Mann vs Machine (AI) => Use a 6-player team of AI controlled mercs (1 AI for certain classes, player takes class slot).
+Mann vs Machine (Online) => Use an online build of MvM, 6-player team (unlimited per team).
+*/
+
 window.addEventListener(
     "error",
     (e) => alert(`${e.message}, ${e.lineno}`)
-)
+);
 
 class TF {}
 
@@ -162,10 +170,14 @@ TF.Weapon = class {
         this.mdl = s.mdl;
         this.atkdelay = s.atkdelay;
         this.attack = s.attack;
+        this.attackalt = s.attackalt;
         this.attackfailsound = s.attackfailsound;
     }
-    atk() {
+    atk1() {
         this.attack();
+    }
+    atk2() {
+        this.attackalt();
     }
 }
 TF.Weapon.Scattergun = class extends TF.Weapon {
@@ -175,6 +187,7 @@ TF.Weapon.Scattergun = class extends TF.Weapon {
             "mdl": null,
             "atkdelay": 0,
             "attack": () => {},
+            "attackalt": () => {},
             "attackfailsound": null
         });
         this.shells = 6;
@@ -192,9 +205,10 @@ TF.Weapon.RocketLauncher = class extends TF.Weapon {
                 if(this.shells > 0) {
                     new TF.Projectile.Rocket(0, 0, 0);
                 } else {
-                    //
+                    //SoundEmitter.emit({});
                 }
             },
+            "attackalt": () => {},
             "attackfailsound": null
         });
         this.shells = 4;
@@ -209,6 +223,7 @@ TF.Weapon.Flamethrower = class extends TF.Weapon {
             "mdl": null,
             "atkdelay": 0,
             "attack": () => {},
+            "attackalt": () => {},
             "attackfailsound": null
         });
         this.ammo = 200;
@@ -221,6 +236,7 @@ TF.Weapon.GrenadeLauncher = class extends TF.Weapon {
             "mdl": null,
             "atkdelay": 0,
             "attack": () => {},
+            "attackalt": () => {},
             "attackfailsound": null
         });
         this.shells = 6;
@@ -235,6 +251,7 @@ TF.Weapon.Minigun = class extends TF.Weapon {
             "mdl": null,
             "atkdelay": 0,
             "attack": () => {},
+            "attackalt": () => {},
             "attackfailsound": null
         });
         this.ammo = 200;
@@ -247,6 +264,7 @@ TF.Weapon.Shotgun = class extends TF.Weapon {
             "mdl": null,
             "atkdelay": 0,
             "attack": () => {},
+            "attackalt": () => {},
             "attackfailsound": null
         });
         this.shells = 6;
@@ -261,6 +279,7 @@ TF.Weapon.SyringeGun = class extends TF.Weapon {
             "mdl": null,
             "atkdelay": 0,
             "attack": () => {},
+            "attackalt": () => {},
             "attackfailsound": null
         });
         this.shells = 40;
@@ -275,6 +294,7 @@ TF.Weapon.SniperRifle = class extends TF.Weapon {
             "mdl": null,
             "atkdelay": 0,
             "attack": () => {},
+            "attackalt": () => {},
             "attackfailsound": null
         });
         this.ammo = 25;
@@ -287,6 +307,7 @@ TF.Weapon.Revolver = class extends TF.Weapon {
             "mdl": null,
             "atkdelay": 0,
             "attack": () => {},
+            "attackalt": () => {},
             "attackfailsound": null
         });
         this.shells = 6;
@@ -330,6 +351,7 @@ TF.Projectile = class {
     constructor(s) {
         this.name = s.name;
         this.collide = s.collide;
+        this.reflectable = s.reflectable;
         this.mdl = s.mdl;
         this.texture = s.texture;
         this.x = s.x;
@@ -339,13 +361,15 @@ TF.Projectile = class {
         this.sizey = s.sizey;
         this.sizez = s.sizez;
         this.speed = s.speed;
+        this.lifespan = s.lifespan;
     }
 }
 TF.Projectile.Rocket = class extends TF.Projectile {
     constructor(s) {
         super({
-            "name": "",
+            "name": "Rocket",
             "collide": () => {},
+            "reflectable": true,
             "mdl": null,
             "texture": null,
             "x": s.x,
@@ -354,10 +378,66 @@ TF.Projectile.Rocket = class extends TF.Projectile {
             "sizex": 5,
             "sizey": 5,
             "sizez": 5,
-            "speed": 1
+            "speed": 1,
+            "lifespan": Infinity
         });
     }
 }
+TF.Projectile.Fire = class extends TF.Projectile {
+    constructor(s) {
+        super({
+            "name": "Fire",
+            "collide": () => {},
+            "reflectable": false,
+            "mdl": null,
+            "texture": null,
+            "x": s.x,
+            "y": s.y,
+            "z": s.z,
+            "sizex": 1,
+            "sizey": 1,
+            "sizez": 1,
+            "speed": 1.5,
+            "lifespan": 0.25
+        });
+    }
+}
+TF.Projectile.Airblast = class extends TF.Projectile {
+    constructor(s) {
+        super({
+            "name": "Airblast",
+            "collide": () => {},
+            "reflectable": false,
+            "mdl": null,
+            "texture": null,
+            "x": s.x,
+            "y": s.y,
+            "z": s.z,
+            "sizex": 5,
+            "sizey": 5,
+            "sizez": 2,
+            "speed": 10,
+            "lifespan": 0.1
+        });
+    }
+}
+/*
+super({
+    "name": "",
+    "collide": () => {},
+    "reflectable": true,
+    "mdl": null,
+    "texture": null,
+    "x": s.x,
+    "y": s.y,
+    "z": s.z,
+    "sizex": 0,
+    "sizey": 0,
+    "sizez": 0,
+    "speed": 0,
+    "lifespan": 0
+});
+*/
 
 TF.ScreenComponent = class {}
 TF.ScreenComponent.Text = class extends TF.ScreenComponent {}
@@ -379,6 +459,10 @@ TF.Colour = class {
 
 TF.Sound = class {}
 
+TF.Prop = class {}
+
+TF.Anim = class {}
+
 class RaycastEmitter {
     static emit(s) {
         const x = s.x;
@@ -394,7 +478,20 @@ class RaycastEmitter {
     }
 }
 class ParticleEmitter {
-    static emit(s) {}
+    static emit(s) {
+        const texture = s.texture;
+        const lifespan = s.lifespan;
+        const channel = s.channel;
+        const x = s.x;
+        const y = s.y;
+        const z = s.z;
+        const minsize = s.minsize;
+        const maxsize = s.maxsize;
+        const minpower = s.minpower;
+        const maxpower = s.maxpower;
+        const updspeed = s.updspeed;
+        const emitrate = s.emitrate;
+    }
 }
 class SoundEmitter {
     static emit(s) {
