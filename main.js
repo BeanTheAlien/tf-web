@@ -346,11 +346,14 @@ TF.Env.Explosion = class extends TF.Env {
         });
     }
 }
+TF.Env.TriggerHurt = class extends TF.Env {}
+TF.Env.Fire = class extends TF.Env {}
 
 TF.Projectile = class {
     constructor(s) {
         this.name = s.name;
         this.collide = s.collide;
+        this.update = s.update;
         this.reflectable = s.reflectable;
         this.mdl = s.mdl;
         this.texture = s.texture;
@@ -369,6 +372,7 @@ TF.Projectile.Rocket = class extends TF.Projectile {
         super({
             "name": "Rocket",
             "collide": () => {},
+            "update": () => {},
             "reflectable": true,
             "mdl": null,
             "texture": null,
@@ -388,6 +392,7 @@ TF.Projectile.Fire = class extends TF.Projectile {
         super({
             "name": "Fire",
             "collide": () => {},
+            "update": () => {},
             "reflectable": false,
             "mdl": null,
             "texture": null,
@@ -407,6 +412,7 @@ TF.Projectile.Airblast = class extends TF.Projectile {
         super({
             "name": "Airblast",
             "collide": () => {},
+            "update": () => {},
             "reflectable": false,
             "mdl": null,
             "texture": null,
