@@ -385,8 +385,10 @@ TF.Projectile = class {
         this.sizez = s.sizez;
         this.speed = s.speed;
         this.lifespan = s.lifespan;
-        this.mesh = BABYLON.MeshBuilder.CreateCapsule("rocket", { height: 1 }, scene);
-        this.mesh.position = new BABYLON.Vector3(this.x, this.y, this.z);
+        this.mesh = BABYLON.MeshBuilder.CreateCapsule("rocket", { height: 2, radius: 0.3 }, scene);
+        this.mesh.material = new BABYLON.StandardMaterial("rocketMat", scene);
+        this.mesh.material.diffuseColor = new BABYLON.Color3(1, 0, 0); // red
+        //this.mesh = BABYLON.MeshBuilder.CreateCapsule("projectile", { height: 1 }, scene);
         this.mesh.physicsImpostor = new BABYLON.PhysicsImpostor(
             this.mesh,
             BABYLON.PhysicsImpostor.BoxImpostor,
