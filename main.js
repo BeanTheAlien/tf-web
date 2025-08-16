@@ -29,15 +29,15 @@ TF.Merc = class {
         this.jumpSpeed = s.jumpSpeed;
         this.moveSpeed = s.moveSpeed;
         this.grounded = true;
-        this.equipped = this.kit.primary;
+        this.equipped = this.primary;
     }
     // update() {
     //     this.gravSpeed += this.gravity;
     //     this.y += this.gravSpeed;
     // }
-    jump() {
-        this.velocity.y = this.gravSpeed + this.jumpSpeed;
-    }
+    // jump() {
+    //     this.velocity.y = this.gravSpeed + this.jumpSpeed;
+    // }
 }
 TF.Merc.Scout = class extends TF.Merc {
     constructor(s) {
@@ -58,7 +58,7 @@ TF.Merc.Soldier = class extends TF.Merc {
         super({
             "name": "Soldier",
             "mdl": null,
-            "kit": { "primary": TF.Weapon.RocketLauncher, "secondary": TF.Weapon.Shotgun, "melee": TF.Weapon.RocketLauncher },
+            "kit": { "primary": TF.Weapon.RocketLauncher, "secondary": TF.Weapon.Shotgun, "melee": TF.Weapon.Shovel },
             "x": s.x,
             "y": s.y,
             "z": s.z,
@@ -205,7 +205,10 @@ TF.Weapon.RocketLauncher = class extends TF.Weapon {
             "atkdelay": 0,
             "attack": () => {
                 if(this.shells > 0) {
-                    new TF.Projectile.Rocket(0, 0, 0);
+                    const forward = camera.getDirection(BABYLON.Axis.Z);
+                    // Offset spawn point in front of the player
+                    const spawnPos = player.mesh.position.add(forward.scale(1.5));
+                    projectiles.push(new TF.Projectile.Rocket({ "x": spawnPos.x, "y": spawnPos.y, "z": spawnPos.z, "xrot": camera.rotation.x, "yrot": camera.rotation.y, "zrot": camera.rotation.z }));
                 } else {
                     //SoundEmitter.emit({});
                 }
@@ -317,6 +320,18 @@ TF.Weapon.Revolver = class extends TF.Weapon {
         this.ammo = 24;
     }
 }
+TF.Weapon.Shovel = class extends TF.Weapon {
+    constructor() {
+        super({
+            "name": "Shovel",
+            "mdl": null,
+            "atkdelay": 0,
+            "attack": () => {},
+            "attackalt": () => {},
+            "attackfailsound": null
+        });
+    }
+}
 
 TF.Env = class {
     constructor(s) {
@@ -391,22 +406,13 @@ TF.Projectile.Rocket = class extends TF.Projectile {
                 new TF.Env.Explosion(loc[0], loc[1], loc[2]);
             },
             "update": () => {
-                // Get the mesh for this rocket
-                const rocketMesh = scene.getMeshByName("RocketMesh_" + this.id); // however you track meshes
-
-                if (!rocketMesh) return;
-
-                // Move forward in the rocket's local forward direction
-                const forward = rocketMesh.forward; // Babylon local forward vector
-                rocketMesh.position.addInPlace(forward.scale(this.speed));
-
-                // Check collisions with enemies or walls
-                for(let target of scene.meshes) {
-                    const collision = rocketMesh.intersectsMesh(target, true);
-                    if(collision.hit) {
-                        const col = collision.getIntersectionPoint();
-                        this.collide(col);
-                        rocketMesh.dispose();
+                const forward = this.mesh.getDirection(BABYLON.Axis.Z);
+                this.mesh.position.addInPlace(forward.scale(this.speed));
+                for (let target of scene.meshes) {
+                    if (this.mesh.intersectsMesh(target, true)) {
+                        const col = this.mesh.position.clone();
+                        this.collide([col.x, col.y, col.z]);
+                        this.mesh.dispose();
                         break;
                     }
                 }
@@ -426,6 +432,8 @@ TF.Projectile.Rocket = class extends TF.Projectile {
             "speed": 1,
             "lifespan": Infinity
         });
+        this.mesh.position = new BABYLON.Vector3(this.x, this.y, this.z);
+        this.mesh.rotation = new BABYLON.Vector3(this.xrot, this.yrot, this.zrot);
     }
 }
 TF.Projectile.Fire = class extends TF.Projectile {
@@ -589,7 +597,7 @@ camera.angularSensibility = 4000;  // Slow down camera rotation
 // Create entities
 const player = new TF.Merc.Soldier({ "x": 0, "y": 0, "z": 0 });
 // Fire when left mouse button is clicked
-function Shoot() { player.atk1(); }
+function Shoot() { player.equipped.atk1(); }
 document.addEventListener("mousedown", Shoot);
 
 player.mesh = BABYLON.MeshBuilder.CreateCapsule("player", { height: 2, radius: 0.5 }, scene);
