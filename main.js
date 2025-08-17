@@ -39,6 +39,11 @@ TF.Merc = class {
             { mass: 1, restitution: 0.1 },
             scene
         );
+        //this.mesh.physicsImpostor.setAngularFactor(new BABYLON.Vector3(0, 1, 0));
+        // aggregate wraps physics + mesh
+        // const agg = new BABYLON.PhysicsAggregate(this.mesh, BABYLON.PhysicsShapeType.CAPSULE, { mass: 1, restitution: 0.1 }, scene);
+        // lock tilt
+        // agg.body.setAngularFactor(new BABYLON.Vector3(0, 1, 0));
         this.mesh.physicsImpostor.registerOnPhysicsCollide(ground.physicsImpostor, () => {
             this.isGrounded = true; // Allow jumping when on the ground
         });
@@ -415,7 +420,7 @@ TF.Env.Explosion = class extends TF.Env {
                 const merc = players.find(p => p.mesh == m);
                 merc.hurt(100 - BABYLON.Vector3.Distance(this.core, merc.mesh.position));
             },
-            "lifespan": 0.5,
+            "lifespan": 500,
             "mdl": null,
             "texture": null,
             "x": s.x,
@@ -460,6 +465,12 @@ TF.Projectile = class {
         );
     }
     tick() {
+        if(!this.mesh) return;
+        this.lifespan--;
+        if(this.lifespan <= 0) {
+            this.mesh.dispose();
+            return;
+        }
         this.update();
     }
 }
@@ -520,7 +531,7 @@ TF.Projectile.Fire = class extends TF.Projectile {
             "sizey": 1,
             "sizez": 1,
             "speed": 1.5,
-            "lifespan": 0.25
+            "lifespan": 250
         });
     }
 }
@@ -543,7 +554,7 @@ TF.Projectile.Airblast = class extends TF.Projectile {
             "sizey": 5,
             "sizez": 2,
             "speed": 10,
-            "lifespan": 0.1
+            "lifespan": 100
         });
     }
 }
@@ -679,6 +690,16 @@ var projectiles = [];
 var env = [];
 var players = [player];
 
+// scene.onBeforeRenderObservable.add(() => {
+//     players.forEach(p => {
+//         if(p.mesh.rotationQuaternion) {
+//             p.mesh.rotationQuaternion = BABYLON.Quaternion.RotationAxis(BABYLON.Axis.Y, p.mesh.rotationQuaternion.toEulerAngles().y);
+//         } else {
+//             console.log("rotation quar missing");
+//         }
+//     });
+// });
+
 // Lock Pointer
 function Lock() {
     if(document.pointerLockElement != canvas) {
@@ -731,7 +752,6 @@ function movePlayer() {
 }
 
 movePlayer();
-
 
 engine.runRenderLoop(game);
 
