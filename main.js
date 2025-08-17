@@ -6,10 +6,10 @@ Mann vs Machine (AI) => Use a 6-player team of AI controlled mercs (1 AI for cer
 Mann vs Machine (Online) => Use an online build of MvM, 6-player team (unlimited per team).
 */
 
-window.addEventListener(
-    "error",
-    (e) => alert(`${e.message}, ${e.lineno}`)
-);
+// window.addEventListener(
+//     "error",
+//     (e) => alert(`${e.message}, ${e.lineno}`)
+// );
 
 class TF {}
 
@@ -20,6 +20,7 @@ TF.Merc = class {
         this.primary = new s.kit.primary;
         this.secondary = new s.kit.secondary;
         this.melee = new s.kit.melee;
+        this.health = s.health;
         this.x = s.x;
         this.y = s.y;
         this.z = s.z;
@@ -30,6 +31,25 @@ TF.Merc = class {
         this.moveSpeed = s.moveSpeed;
         this.grounded = true;
         this.equipped = this.primary;
+        this.mesh = BABYLON.MeshBuilder.CreateCapsule("player", { height: 2, radius: 0.5 }, scene);
+        this.mesh.position = new BABYLON.Vector3(0, 5, 0);
+        this.mesh.physicsImpostor = new BABYLON.PhysicsImpostor(
+            this.mesh,
+            BABYLON.PhysicsImpostor.BoxImpostor,
+            { mass: 1, restitution: 0.1 },
+            scene
+        );
+        this.mesh.physicsImpostor.registerOnPhysicsCollide(ground.physicsImpostor, () => {
+            this.isGrounded = true; // Allow jumping when on the ground
+        });
+        this.isGrounded = false;
+    }
+    hurt(d) {
+        this.health -= d;
+        if(this.health <= 0) this.kill();
+    }
+    kill() {
+        this.mesh.dispose();
     }
     // update() {
     //     this.gravSpeed += this.gravity;
@@ -208,6 +228,9 @@ TF.Weapon.RocketLauncher = class extends TF.Weapon {
                     const forward = camera.getDirection(BABYLON.Axis.Z);
                     // Offset spawn point in front of the player
                     const spawnPos = player.mesh.position.add(forward.scale(1.5));
+                    console.log("Player:", player.mesh.position);
+                    console.log("Forward:", forward);
+                    console.log("Spawn:", spawnPos);
                     projectiles.push(new TF.Projectile.Rocket({ "x": spawnPos.x, "y": spawnPos.y, "z": spawnPos.z, "xrot": camera.rotation.x, "yrot": camera.rotation.y, "zrot": camera.rotation.z }));
                 } else {
                     //SoundEmitter.emit({});
@@ -339,12 +362,46 @@ TF.Env = class {
         this.onsummon = s.onsummon;
         this.onexpire = s.onexpire;
         this.ontouched = s.ontouched;
+        this.update = () => {
+            if(!this.mesh) return;
+            this.lifespan--;
+            if(this.lifespan < 0) {
+                this.mesh.dispose();
+                this.onexpire();
+                return;
+            }
+            for(let target of scene.meshes) {
+                if(this.mesh.intersectsMesh(target, true)) {
+                    this.ontouched(target);
+                }
+            }
+        }
         this.lifespan = s.lifespan;
         this.mdl = s.mdl;
         this.texture = s.texture;
         this.x = s.x;
         this.y = s.y;
         this.z = s.z;
+        this.sizex = s.sizex;
+        this.sizey = s.sizey;
+        this.sizez = s.sizez;
+        this.core = new BABYLON.Vector3(this.sizex / 2, this.sizey / 2, this.sizez / 2);
+        this.mesh = BABYLON.MeshBuilder.CreateBox("env", { width: this.sizex, height: this.sizey, depth: this.sizez }, scene);
+        this.mesh.material = new BABYLON.StandardMaterial("envmat", scene);
+        this.mesh.material.diffuseColor = new BABYLON.Color3(1, 0, 0); // red
+        this.mesh.physicsImpostor = new BABYLON.PhysicsImpostor(
+            this.mesh,
+            BABYLON.PhysicsImpostor.BoxImpostor,
+            { mass: 1, restitution: 0.1 },
+            scene
+        );
+        this.onsummon();
+    }
+    ismerc(m) {
+        return this.players.some(p => p.mesh == m);
+    }
+    tick() {
+        this.update();
     }
 }
 TF.Env.Explosion = class extends TF.Env {
@@ -353,13 +410,20 @@ TF.Env.Explosion = class extends TF.Env {
             "name": "Explosion",
             "onsummon": () => {},
             "onexpire": () => {},
-            "ontouched": () => {},
+            "ontouched": (m) => {
+                if(!this.ismerc(m)) return;
+                const merc = players.find(p => p.mesh == m);
+                merc.hurt(100 - BABYLON.Vector3.Distance(this.core, merc.mesh.position));
+            },
             "lifespan": 0.5,
             "mdl": null,
             "texture": null,
             "x": s.x,
             "y": s.y,
-            "z": s.z
+            "z": s.z,
+            "sizex": 3,
+            "sizey": 3,
+            "sizez": 3
         });
     }
 }
@@ -385,10 +449,9 @@ TF.Projectile = class {
         this.sizez = s.sizez;
         this.speed = s.speed;
         this.lifespan = s.lifespan;
-        this.mesh = BABYLON.MeshBuilder.CreateCapsule("rocket", { height: 2, radius: 0.3 }, scene);
-        this.mesh.material = new BABYLON.StandardMaterial("rocketMat", scene);
+        this.mesh = BABYLON.MeshBuilder.CreateCapsule("projectile", { height: 2, radius: 0.3 }, scene);
+        this.mesh.material = new BABYLON.StandardMaterial("projmat", scene);
         this.mesh.material.diffuseColor = new BABYLON.Color3(1, 0, 0); // red
-        //this.mesh = BABYLON.MeshBuilder.CreateCapsule("projectile", { height: 1 }, scene);
         this.mesh.physicsImpostor = new BABYLON.PhysicsImpostor(
             this.mesh,
             BABYLON.PhysicsImpostor.BoxImpostor,
@@ -410,8 +473,8 @@ TF.Projectile.Rocket = class extends TF.Projectile {
             "update": () => {
                 const forward = this.mesh.getDirection(BABYLON.Axis.Z);
                 this.mesh.position.addInPlace(forward.scale(this.speed));
-                for (let target of scene.meshes) {
-                    if (this.mesh.intersectsMesh(target, true)) {
+                for(let target of scene.meshes) {
+                    if(this.mesh.intersectsMesh(target, true)) {
                         const col = this.mesh.position.clone();
                         this.collide([col.x, col.y, col.z]);
                         this.mesh.dispose();
@@ -434,8 +497,8 @@ TF.Projectile.Rocket = class extends TF.Projectile {
             "speed": 1,
             "lifespan": Infinity
         });
-        this.mesh.position = new BABYLON.Vector3(this.x, this.y, this.z);
-        this.mesh.rotation = new BABYLON.Vector3(this.xrot, this.yrot, this.zrot);
+        this.mesh.position.set(this.x, this.y, this.z);
+        this.mesh.rotationQuaternion = camera.absoluteRotation.clone();
     }
 }
 TF.Projectile.Fire = class extends TF.Projectile {
@@ -577,11 +640,12 @@ class SoundEmitter {
 
 class Camera {}
 
-const canvas = document.getElementById('gameCanvas');
+const canvas = document.getElementById("gameCanvas");
 
 function game() {
     camera.position.copyFrom(player.mesh.position);
     projectiles.forEach(p => p.tick());
+    env.forEach(e => e.tick());
     scene.render();
 }
 
@@ -590,6 +654,15 @@ const engine = new BABYLON.Engine(canvas, true);
 const scene = new BABYLON.Scene(engine);
 
 scene.enablePhysics(new BABYLON.Vector3(0, -9.8, 0), new BABYLON.CannonJSPlugin());
+
+const ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 50, height: 50 }, scene);
+ground.position.y = 0;
+ground.physicsImpostor = new BABYLON.PhysicsImpostor(
+    ground,
+    BABYLON.PhysicsImpostor.BoxImpostor,
+    { mass: 0, restitution: 0.1 },
+    scene
+);
 
 // First-Person Camera
 const camera = new BABYLON.UniversalCamera("FPCamera", new BABYLON.Vector3(0, 1.5, 0), scene);
@@ -602,29 +675,9 @@ const player = new TF.Merc.Soldier({ "x": 0, "y": 0, "z": 0 });
 function Shoot() { player.equipped.atk1(); }
 document.addEventListener("mousedown", Shoot);
 
-player.mesh = BABYLON.MeshBuilder.CreateCapsule("player", { height: 2, radius: 0.5 }, scene);
-player.mesh.position = new BABYLON.Vector3(0, 5, 0);
-player.mesh.physicsImpostor = new BABYLON.PhysicsImpostor(
-    player.mesh,
-    BABYLON.PhysicsImpostor.BoxImpostor,
-    { mass: 1, restitution: 0.1 },
-    scene
-);
-const ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 50, height: 50 }, scene);
-ground.position.y = 0;
-ground.physicsImpostor = new BABYLON.PhysicsImpostor(
-    ground,
-    BABYLON.PhysicsImpostor.BoxImpostor,
-    { mass: 0, restitution: 0.1 },
-    scene
-);
-player.isGrounded = false;
-
-player.mesh.physicsImpostor.registerOnPhysicsCollide(ground.physicsImpostor, function() {
-    player.isGrounded = true; // Allow jumping when on the ground
-});
-
 var projectiles = [];
+var env = [];
+var players = [player];
 
 // Lock Pointer
 function Lock() {
