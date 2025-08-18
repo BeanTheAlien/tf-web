@@ -406,7 +406,7 @@ TF.Env = class {
         this.onsummon();
     }
     ismerc(m) {
-        return this.players.some(p => p.mesh == m);
+        return players.some(p => p.mesh == m);
     }
     tick() {
         this.update();
@@ -422,6 +422,7 @@ TF.Env.Explosion = class extends TF.Env {
                 if(!this.ismerc(m)) return;
                 const merc = players.find(p => p.mesh == m);
                 merc.hurt(100 - BABYLON.Vector3.Distance(this.core, merc.mesh.position));
+                this.mesh.dispose();
             },
             "lifespan": 500,
             "mdl": null,
@@ -692,8 +693,15 @@ camera.angularSensibility = 4000;  // Slow down camera rotation
 // Create entities
 const player = new TF.Merc.Soldier({ "x": 0, "y": 0, "z": 0 });
 // Fire when left mouse button is clicked
-function Shoot() { player.equipped.atk1(); }
-document.addEventListener("mousedown", Shoot);
+function Shoot1(e) {
+    player.equipped.atk1();
+}
+function Shoot2(e) {
+    e.preventDefault();
+    player.equipped.atk2();
+}
+document.addEventListener("mousedown", Shoot1);
+document.addEventListener("contextmenu", Shoot2);
 
 var projectiles = [];
 var env = [];
