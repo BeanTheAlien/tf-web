@@ -34,7 +34,7 @@ function createFromJSON() {
         author - defines author
         version - defines version
         events - defines events
-        commands - defines commands
+        commands - defines chat commands
         */
     });
 }
