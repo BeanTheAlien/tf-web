@@ -238,7 +238,18 @@ TF.Weapon.RocketLauncher = class extends TF.Weapon {
                     console.log("Spawn:", spawnPos);
                     projectiles.push(new TF.Projectile.Rocket({ "x": spawnPos.x, "y": spawnPos.y, "z": spawnPos.z, "xrot": camera.rotation.x, "yrot": camera.rotation.y, "zrot": camera.rotation.z }));
                 } else {
-                    //SoundEmitter.emit({});
+                    const emitter = new SoundEmitter({
+                        "sound": this.attackfailsound,
+                        "volume": 100,
+                        "channel": TF.Channel.Sound.Weapon,
+                        "emitstyle": "comp",
+                        "comp": null,
+                        "bone": nnull,
+                        "offsetx": 0,
+                        "offsety": 0,
+                        "offsetz": 0
+                    });
+                    emitter.emit();
                 }
             },
             "attackalt": () => {},
@@ -252,11 +263,41 @@ TF.Weapon.RocketLauncher = class extends TF.Weapon {
 TF.Weapon.Flamethrower = class extends TF.Weapon {
     constructor() {
         super({
-            "name": "",
+            "name": "Flamethrower",
             "mdl": null,
             "atkdelay": 0,
-            "attack": () => {},
-            "attackalt": () => {},
+            "attack": () => {
+                if(this.ammo > 0) {
+                    const forward = camera.getDirection(BABYLON.Axis.Z);
+                    // Offset spawn point in front of the player
+                    const spawnPos = player.mesh.position.add(forward.scale(1.5));
+                    console.log("Player:", player.mesh.position);
+                    console.log("Forward:", forward);
+                    console.log("Spawn:", spawnPos);
+                    projectiles.push(new TF.Projectile.Fire({ "x": spawnPos.x, "y": spawnPos.y, "z": spawnPos.z, "xrot": camera.rotation.x, "yrot": camera.rotation.y, "zrot": camera.rotation.z }));
+                } else {
+                    const emitter = new SoundEmitter({
+                        "sound": this.attackfailsound,
+                        "volume": 100,
+                        "channel": TF.Channel.Sound.Weapon,
+                        "emitstyle": "comp",
+                        "comp": null,
+                        "bone": null,
+                        "offsetx": 0,
+                        "offsety": 0,
+                        "offsetz": 0
+                    });
+                }
+            },
+            "attackalt": () => {
+                const forward = camera.getDirection(BABYLON.Axis.Z);
+                // Offset spawn point in front of the player
+                const spawnPos = player.mesh.position.add(forward.scale(1.5));
+                console.log("Player:", player.mesh.position);
+                console.log("Forward:", forward);
+                console.log("Spawn:", spawnPos);
+                projectiles.push(new TF.Projectile.Fire({ "x": spawnPos.x, "y": spawnPos.y, "z": spawnPos.z, "xrot": camera.rotation.x, "yrot": camera.rotation.y, "zrot": camera.rotation.z }));
+            },
             "attackfailsound": null
         });
         this.ammo = 200;
@@ -589,6 +630,7 @@ TF.Error = class extends Error {
     constructor(s) {
         this.name = s.name;
         this.message = s.message;
+        super(this.message);
     }
 }
 
@@ -604,6 +646,21 @@ TF.Sound = class {}
 TF.Prop = class {}
 
 TF.Anim = class {}
+
+TF.Channel = class {
+    constructor(s) {
+        this.name = s.name;
+        this.priority = s.priority;
+    }
+}
+TF.Channel.Debug = class extends TF.Channel {}
+TF.Channel.Raycast = class extends TF.Channel {}
+TF.Channel.Particle = class extends TF.Channel {}
+TF.Channel.Sound = class {}
+TF.Channel.Sound.Ambient = class extends TF.Channel {}
+TF.Channel.Sound.Weapon = class extends TF.Channel {}
+TF.Channel.Anim = class extends TF.Channel {}
+TF.Channel.Physics = class extends TF.Channel {}
 
 class RaycastEmitter {
     constructor(s) {
