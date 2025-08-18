@@ -690,15 +690,13 @@ var projectiles = [];
 var env = [];
 var players = [player];
 
-// scene.onBeforeRenderObservable.add(() => {
-//     players.forEach(p => {
-//         if(p.mesh.rotationQuaternion) {
-//             p.mesh.rotationQuaternion = BABYLON.Quaternion.RotationAxis(BABYLON.Axis.Y, p.mesh.rotationQuaternion.toEulerAngles().y);
-//         } else {
-//             console.log("rotation quar missing");
-//         }
-//     });
-// });
+scene.onBeforeRenderObservable.add(() => {
+    players.forEach(p => {
+        if(p.mesh.rotationQuaternion) {
+            p.mesh.rotationQuaternion = BABYLON.Quaternion.RotationAxis(BABYLON.Axis.Y, p.mesh.rotationQuaternion.toEulerAngles().y);
+        }
+    });
+});
 
 // Lock Pointer
 function Lock() {
