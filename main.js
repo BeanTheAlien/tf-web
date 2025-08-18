@@ -605,52 +605,57 @@ TF.Prop = class {}
 TF.Anim = class {}
 
 class RaycastEmitter {
-    static emit(s) {
-        const x = s.x;
-        const y = s.y;
-        const z = s.z;
-        const radius = s.radius;
-        const ignore = s.ignore;
-        const channel = s.channel;
-        const visibility = s.visibility;
-        const colour = s.colour;
-        const hitcount = s.hitcount;
+    constructor(s) {
+        this.x = s.x;
+        this.y = s.y;
+        this.z = s.z;
+        this.radius = s.radius;
+        this.ignore = s.ignore;
+        this.channel = s.channel;
+        this.visibility = s.visibility;
+        this.colour = s.colour;
+        this.hitcount = s.hitcount;
+    }
+    emit() {
         let hits = [];
     }
 }
 class ParticleEmitter {
-    static emit(s) {
-        const texture = s.texture;
-        const lifespan = s.lifespan;
-        const channel = s.channel;
-        const x = s.x;
-        const y = s.y;
-        const z = s.z;
-        const minsize = s.minsize;
-        const maxsize = s.maxsize;
-        const minpower = s.minpower;
-        const maxpower = s.maxpower;
-        const updspeed = s.updspeed;
-        const emitrate = s.emitrate;
+    constructor(s) {
+        this.texture = s.texture;
+        this.lifespan = s.lifespan;
+        this.channel = s.channel;
+        this.x = s.x;
+        this.y = s.y;
+        this.z = s.z;
+        this.minsize = s.minsize;
+        this.maxsize = s.maxsize;
+        this.minpower = s.minpower;
+        this.maxpower = s.maxpower;
+        this.updspeed = s.updspeed;
+        this.emitrate = s.emitrate;
     }
+    emit() {}
 }
 class SoundEmitter {
-    static emit(s) {
-        const sound = s.sound;
-        const volume = s.volume;
-        const channel = s.channel;
-        if(s.emitstyle == "comp") {
-            const comp = s.comp;
-            const bone = s.bone;
-            const offsetx = s.boneoffsetx ?? 0;
-            const offsety = s.boneoffsety ?? 0;
-            const offsetz = s.boneoffsetz ?? 0;
-        } else if(s.emitstyle == "spatial") {
-            const x = s.x;
-            const y = s.y;
-            const z = s.z;
+    constructor(s) {
+        this.sound = s.sound;
+        this.volume = s.volume;
+        this.channel = s.channel;
+        this.emitstyle = s.emitstyle;
+        if(this.emitstyle == "comp") {
+            this.comp = s.comp;
+            this.bone = s.bone;
+            this.offsetx = s.offsetx;
+            this.offsety = s.offsety;
+            this.offsetz = s.offsetz;
+        } else if(this.emitstyle == "spaital") {
+            this.x = s.x;
+            this.y = s.y;
+            this.z = s.z;
         }
     }
+    emit() {}
 }
 
 class Camera {}
@@ -758,4 +763,4 @@ movePlayer();
 engine.runRenderLoop(game);
 
 // Resize Handler
-window.addEventListener('resize', () => engine.resize());
+window.addEventListener("resize", () => engine.resize());
