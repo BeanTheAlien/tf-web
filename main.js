@@ -384,6 +384,7 @@ TF.Env = class {
         this.lifespan = s.lifespan;
         this.mdl = s.mdl;
         this.texture = s.texture;
+        this.usegrav = s.usegrav;
         this.x = s.x;
         this.y = s.y;
         this.z = s.z;
@@ -394,12 +395,14 @@ TF.Env = class {
         this.mesh = BABYLON.MeshBuilder.CreateBox("env", { width: this.sizex, height: this.sizey, depth: this.sizez }, scene);
         this.mesh.material = new BABYLON.StandardMaterial("envmat", scene);
         this.mesh.material.diffuseColor = new BABYLON.Color3(1, 0, 0); // red
-        this.mesh.physicsImpostor = new BABYLON.PhysicsImpostor(
-            this.mesh,
-            BABYLON.PhysicsImpostor.BoxImpostor,
-            { mass: 1, restitution: 0.1 },
-            scene
-        );
+        if(this.usegrav) {
+            this.mesh.physicsImpostor = new BABYLON.PhysicsImpostor(
+                this.mesh,
+                BABYLON.PhysicsImpostor.BoxImpostor,
+                { mass: 1, restitution: 0.1 },
+                scene
+            );
+        }
         this.onsummon();
     }
     ismerc(m) {
@@ -423,6 +426,7 @@ TF.Env.Explosion = class extends TF.Env {
             "lifespan": 500,
             "mdl": null,
             "texture": null,
+            "usegrav": false,
             "x": s.x,
             "y": s.y,
             "z": s.z,
