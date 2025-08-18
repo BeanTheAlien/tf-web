@@ -18,12 +18,14 @@ function createFromJSON() {
     document.body.appendChild(upload);
     upload.addEventListener("change", (e) => {
         const file = e.target.files[0];
+        let data;
         try {
-            const data = JSON.parse(file);
+            data = JSON.parse(file);
         } catch(err) {
             const div = document.createElement("div");
             div.innerHTML = `JSON file parse failed: ${err}`;
             document.body.appendChild(div);
+            return;
         }
     });
 }
