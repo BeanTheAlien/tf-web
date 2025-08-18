@@ -27,6 +27,15 @@ function createFromJSON() {
             document.body.appendChild(div);
             return;
         }
+        /*
+        Fields
+        name - defines name
+        descrip - defines description
+        author - defines author
+        version - defines version
+        events - defines events
+        commands - defines commands
+        */
     });
 }
 function createFromFields() {}
