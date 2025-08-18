@@ -624,6 +624,9 @@ class RaycastEmitter {
 class ParticleEmitter {
     constructor(s) {
         this.texture = s.texture;
+        this.colour1 = new s.colour1();
+        this.colour2 = new s.colour2();
+        this.colourdead = new s.colourdead(); // new (colour => BABYLON.Color4)(stuff)
         this.lifespan = s.lifespan;
         this.channel = s.channel;
         this.x = s.x;
@@ -636,7 +639,30 @@ class ParticleEmitter {
         this.updspeed = s.updspeed;
         this.emitrate = s.emitrate;
     }
-    emit() {}
+    emit() {
+        let ps = new BABYLON.ParticleSystem("particles", 1000, scene);
+        ps.particleTexture = new BABYLON.Texture(this.texture, scene); // https://www.babylonjs-playground.com/textures/flare.png
+        // Emitter position (where the explosion happens)
+        ps.emitter = new BABYLON.Vector3(this.x, this.y, this.z);
+        // Color gradient (fire-like effect)
+        ps.color1 = this.colour1; // new BABYLON.Color4(1, 0.6, 0, 1); // Orange
+        ps.color2 = this.colour2; // new BABYLON.Color4(1, 0.2, 0, 1); // Red
+        ps.colorDead = this.colourdead; // new BABYLON.Color4(0, 0, 0, 0); // Fade out
+        // Speed and spread
+        ps.minSize = this.minsize; // particleSystem.minSize = 2.5;
+        ps.maxSize = this.maxsize; // particleSystem.maxSize = 5;
+        ps.minEmitPower = this.minpower; // particleSystem.minEmitPower = 2;
+        ps.maxEmitPower = this.maxpower; // particleSystem.maxEmitPower = 5;
+        ps.updateSpeed = this.updspeed; // particleSystem.updateSpeed = 0.02;
+        // Explosion burst
+        ps.emitRate = this.emitrate; // More particles = bigger explosion
+        ps.start();
+        // Stop the explosion after 0.5s
+        setTimeout(() => {
+            ps.stop();
+            setTimeout(() => ps.dispose(), 1000); // Cleanup
+        }, this.lifespan);
+    }
 }
 class SoundEmitter {
     constructor(s) {
