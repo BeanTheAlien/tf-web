@@ -622,9 +622,79 @@ super({
 });
 */
 
-TF.ScreenComponent = class {}
-TF.ScreenComponent.Text = class extends TF.ScreenComponent {}
-TF.ScreenComponent.Rect = class extends TF.ScreenComponent {}
+TF.ScreenComponent = class {
+    constructor(s) {
+        this.name = s.name;
+        this.x = s.x;
+        this.y = s.y;
+        this.width = s.width;
+        this.height = s.height;
+        this.actions = s.actions;
+        this.content = s.content;
+        this.onspawn = s.onspawn;
+        this.onexpire = s.onexpire;
+        this.lifespan = s.lifespan;
+        this.channel = s.channel;
+        this.texture = s.texture;
+    }
+}
+TF.ScreenComponent.Text = class extends TF.ScreenComponent {
+    constructor(s) {
+        super({
+            "name": "Text",
+            "x": s.x,
+            "y": s.y,
+            "width": s.width,
+            "height": s.height,
+            "actions": {},
+            "content": s.content,
+            "onspawn": () => {},
+            "onexpire": () => {},
+            "lifespan": s.lifespan,
+            "channel": TF.Channel.ScreenComponent,
+            "texture": s.texture
+        });
+    }
+}
+TF.ScreenComponent.Rect = class extends TF.ScreenComponent {
+    constructor(s) {
+        super({
+            "name": "Rectangle",
+            "x": s.x,
+            "y": s.y,
+            "width": s.width,
+            "height": s.height,
+            "actions": {},
+            "content": s.content,
+            "onspawn": () => {},
+            "onexpire": () => {},
+            "lifespan": s.lifespan,
+            "channel": TF.Channel.ScreenComponent,
+            "texture": s.texture
+        });
+    }
+}
+TF.ScreenComponent.Vote = class extends TF.ScreenComponent {
+    constructor(s) {
+        super({
+            "name": "Vote",
+            "x": s.x,
+            "y": s.y,
+            "width": s.width,
+            "height": s.height,
+            "actions": s.actions,
+            "content": s.content,
+            "onspawn": () => {},
+            "onexpire": (r) => {
+                // Submit vote to TF class (map switch, surrender?)
+                // r = result of vote
+            },
+            "lifespan": s.lifespan,
+            "channel": TF.Channel.ScreenComponent,
+            "texture": s.texture
+        });
+    }
+}
 
 TF.Error = class extends Error {
     constructor(s) {
@@ -661,6 +731,7 @@ TF.Channel.Sound.Ambient = class extends TF.Channel {}
 TF.Channel.Sound.Weapon = class extends TF.Channel {}
 TF.Channel.Anim = class extends TF.Channel {}
 TF.Channel.Physics = class extends TF.Channel {}
+TF.Channel.ScreenComponent = class extends TF.Channel {}
 
 TF.AI = class {
     constructor(s) {
