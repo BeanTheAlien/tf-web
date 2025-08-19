@@ -662,6 +662,12 @@ TF.Channel.Sound.Weapon = class extends TF.Channel {}
 TF.Channel.Anim = class extends TF.Channel {}
 TF.Channel.Physics = class extends TF.Channel {}
 
+TF.AI = class {
+    constructor(s) {
+        this.name = s.name;
+    }
+}
+
 class RaycastEmitter {
     constructor(s) {
         this.x = s.x;
