@@ -688,13 +688,13 @@ TF.ScreenComponent.Vote = class extends TF.ScreenComponent {
             "onexpire": (r) => {
                 // Submit vote to TF class (map switch, surrender?)
                 // r = result of vote
-                this.submitto(r);
+                this.submissionloc(r);
             },
-            "submitto": s.submitto,
             "lifespan": s.lifespan,
             "channel": TF.Channel.ScreenComponent,
             "texture": s.texture
         });
+        this.submissionloc = s.submissionloc;
     }
 }
 
