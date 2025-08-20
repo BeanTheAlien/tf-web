@@ -9,7 +9,7 @@ const plugin = {
         }
     },
     "commands": {
-        "surrender": ""
+        "surrender": `new TF.ScreenComponent.Vote({ "x": 0, "y": 0, "width": 0, "height": 0, "actions": { 1: () => { r["yes"]++; }, 2: () => { r["no"]++; } }, "content": "<p>Surrender?</p><br><br><p>(1) Yes</p><p>(2) No</p>", "submissionloc": null, "lifespan": 0, "texture": null });`
     }
 };
 
