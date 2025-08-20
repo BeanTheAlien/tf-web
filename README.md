@@ -19,3 +19,6 @@ tf-web-unstable - TF web most recent unstable build. Full package. - <a href="" 
 [UNDER CONSTRUCTRION] tf-web-unstable-single - TF web singlelayer most recent unstable build. - <a href="" download>download</a>
 
 tf-web-early - TF web early access build. - <a href="" download>download</a>
+
+# Annoucements
+[v0.1.6+] If you haven't upgraded to the newest version, upgrade now! "kit" is now deprecated and replaced with "loadout". The AI has been further updated. The AI patch for 0.1.7 should be released in the coming weeks to play a basic game against an AI.
