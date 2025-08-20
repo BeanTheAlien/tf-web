@@ -14,6 +14,9 @@ Mann vs Machine (Online) => Use an online build of MvM, 6-player team (unlimited
 class TF {}
 
 TF.Merc = class {
+    static BotNames = ["Bot"];
+    static MercClasses = [TF.Merc.Scout, TF.Merc.Soldier, TF.Merc.Pyro, TF.Merc.Demoman, TF.Merc.Heavy, TF.Merc.Engineer, TF.Merc.Medic, TF.Merc.Sniper, TF.Merc.Spy];
+
     constructor(s) {
         this.name = s.name;
         this.mdl = s.mdl;
@@ -187,6 +190,21 @@ TF.Merc.Spy = class extends TF.Merc {
             "z": s.z,
             "jumpSpeed": 0.5,
             "moveSpeed": 0.75
+        });
+    }
+}
+TF.Merc.AI = class extends TF.Merc {
+    constructor(s) {
+        //const aiclass = new TF.Merc.MercClasses[Math.random() * TF.Merc.MercClasses.length]({ "x": 0, "y": 0, "z": 0 });
+        super({
+            "name": TF.Merc.BotNames[Math.random() * TF.Merc.BotNames.length],
+            "mdl": null,
+            "kit": "", //{ "primary": aiclass.kit.primary, "secondary": aiclass.kit.secondary, "melee": aiclass.kit.melee },
+            "x": s.x,
+            "y": s.y,
+            "z": s.z,
+            "jumpSpeed": 0,
+            "moveSpeed": 0
         });
     }
 }
