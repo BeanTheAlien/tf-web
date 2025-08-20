@@ -296,7 +296,7 @@ TF.Weapon.Flamethrower = class extends TF.Weapon {
                 console.log("Player:", player.mesh.position);
                 console.log("Forward:", forward);
                 console.log("Spawn:", spawnPos);
-                projectiles.push(new TF.Projectile.Fire({ "x": spawnPos.x, "y": spawnPos.y, "z": spawnPos.z, "xrot": camera.rotation.x, "yrot": camera.rotation.y, "zrot": camera.rotation.z }));
+                projectiles.push(new TF.Projectile.Airblast({ "x": spawnPos.x, "y": spawnPos.y, "z": spawnPos.z, "xrot": camera.rotation.x, "yrot": camera.rotation.y, "zrot": camera.rotation.z }));
             },
             "attackfailsound": null
         });
