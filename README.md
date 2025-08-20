@@ -5,6 +5,8 @@ Team Fortress 2 HTML port.
 
 This recreation of Team Fortress 2 is a loyal port to HTML using the Babylon.js engine.
 
+# NOTE: DOWNLOADS WILL NOT WORK RN! STILL WORKING ON PACKAGES!
+
 # Builds
 tf-web-stable - TF web most recent stable build. Full package. - <a href="" download>download</a><br>
 [UNDER CONSTRUCTRION] tf-web-stable-bots - TF web bot multiplayer most recent stable build. - <a href="" download>download</a><br>
