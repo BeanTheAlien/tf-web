@@ -243,7 +243,7 @@ TF.Merc.AI = class extends TF.Merc {
         super({
             "name": TF.Merc.BotNames[Math.floor(Math.random() * TF.Merc.BotNames.length)],
             "mdl": null,
-            "loadout": { ...TF.Merc.MercClasses[Math.floor(Math.random() * TF.Merc.MercClasses.length)] },
+            "loadout": { ...TF.Merc.MercClasses[Math.floor(Math.random() * TF.Merc.MercClasses.length)].defaultLoadout },
             "x": s.x,
             "y": s.y,
             "z": s.z,
