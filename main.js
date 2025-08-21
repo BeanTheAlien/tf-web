@@ -536,7 +536,6 @@ TF.Env.Explosion = class extends TF.Env {
                 if(!this.ismerc(m)) return;
                 const merc = players.find(p => p.mesh == m);
                 merc.hurt(100 - BABYLON.Vector3.Distance(this.core, merc.mesh.position));
-                this.mesh.dispose();
             },
             "lifespan": 500,
             "mdl": null,
