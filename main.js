@@ -280,6 +280,7 @@ TF.Merc.AI = class {
         this.goal = null;
     }
     tick() {
+        // this.components.vision.update();
         this.update();
         /*
         exec steps:
