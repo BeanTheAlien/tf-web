@@ -252,7 +252,15 @@ TF.Merc.AI = class extends TF.Merc {
         });
     }
     update() {
-        //
+        /*
+        exec steps:
+        1. Determine role (based on class)
+        2. Determine variables (metal, übercharge, ammo, usw)
+        3. Determine goals (based on gamemode)
+        4. Determine team hints (possible spies, known sentry gun locations, usw)
+        5. Determine if enemies are seen (if so, get locations)
+        6. Determine next steps
+        */
     }
 }
 
