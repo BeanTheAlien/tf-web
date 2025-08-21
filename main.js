@@ -241,15 +241,18 @@ TF.Merc.Spy = class extends TF.Merc {
 TF.Merc.AI = class extends TF.Merc {
     constructor(s) {
         super({
-            "name": TF.Merc.BotNames[Math.random() * TF.Merc.BotNames.length],
+            "name": TF.Merc.BotNames[Math.floor(Math.random() * TF.Merc.BotNames.length)],
             "mdl": null,
-            "loadout": { ...TF.Merc.MercClasses[Math.random() * TF.Merc.MercClasses.length].defaultLoadout },
+            "loadout": { ...TF.Merc.MercClasses[Math.floor(Math.random() * TF.Merc.MercClasses.length)] },
             "x": s.x,
             "y": s.y,
             "z": s.z,
             "jumpSpeed": 0,
             "moveSpeed": 0
         });
+    }
+    update() {
+        //
     }
 }
 
@@ -940,6 +943,7 @@ document.addEventListener("contextmenu", Shoot2);
 var projectiles = [];
 var env = [];
 var players = [player];
+var ai = [];
 
 scene.onBeforeRenderObservable.add(() => {
     players.forEach(p => {
@@ -947,6 +951,7 @@ scene.onBeforeRenderObservable.add(() => {
             p.mesh.rotationQuaternion = BABYLON.Quaternion.RotationAxis(BABYLON.Axis.Y, p.mesh.rotationQuaternion.toEulerAngles().y);
         }
     });
+    ai.forEach(a => a.update());
 });
 
 // Lock Pointer
