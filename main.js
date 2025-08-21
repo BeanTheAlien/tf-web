@@ -274,6 +274,9 @@ TF.Merc.AI = class {
             this.isGrounded = true; // Allow jumping when on the ground
         });
         this.isGrounded = false;
+        this.components = {};
+        this.components.vision = new TF.AI.Vision();
+        this.components.hearing = new TF.AI.Hearing();
     }
     tick() {
         this.update();
@@ -1043,6 +1046,8 @@ TF.AI = class {
         this.action = s.action;
     }
 }
+TF.AI.Vision = class extends TF.AI {}
+TF.AI.Hearing = class extends TF.AI {}
 
 class RaycastEmitter {
     constructor(s) {
