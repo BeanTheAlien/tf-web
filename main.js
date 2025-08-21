@@ -277,6 +277,7 @@ TF.Merc.AI = class {
         this.components = {};
         this.components.vision = new TF.AI.Vision();
         this.components.hearing = new TF.AI.Hearing();
+        this.goal = null;
     }
     tick() {
         this.update();
@@ -341,7 +342,9 @@ TF.Merc.AI.Soldier = class extends TF.Merc.AI {
             "z": s.z,
             "jumpSpeed": 0.5,
             "moveSpeed": 0.6,
-            "update": () => {}
+            "update": () => {
+                const sees = this.components.vision;
+            }
         });
     }
 }
@@ -1014,7 +1017,16 @@ TF.Error = class extends Error {
 TF.Colour = class {
     constructor(s) {
         this.name = s.name;
-        this.hex = s.hex;
+        this.rgba = s.rgba;
+        this.colour = new BABYLON.Color4(this.rgba.r, this.rgba.g, this.rgba.b, this.rgba.a);
+    }
+}
+TF.Colour.Red = class extends TF.Colour {
+    constructor() {
+        super({
+            "name": "Red",
+            "rgba": { "r": 255, "g": 0, "b": 0, "a": 1 }
+        });
     }
 }
 
@@ -1044,25 +1056,56 @@ TF.AI = class {
     constructor(s) {
         this.name = s.name;
         this.action = s.action;
+        this.ref = s.ref;
+    }
+    run() {
+        return this.action();
     }
 }
-TF.AI.Vision = class extends TF.AI {}
+TF.AI.Vision = class extends TF.AI {
+    constructor(r) {
+        super({
+            "name": "Vision",
+            "action": () => {
+                const mesh = this.ref.mesh;
+                const raycaster = new RaycastEmitter({ "emitystyle": "cam", "radius": 5, "ignore": [], "channel": TF.Channel.Raycast, "visibility": 0, "colour": TF.Colour.Red });
+                return raycaster.emit();
+            },
+            "ref": r
+        });
+    }
+}
 TF.AI.Hearing = class extends TF.AI {}
 
 class RaycastEmitter {
     constructor(s) {
-        this.x = s.x;
-        this.y = s.y;
-        this.z = s.z;
+        this.emitstyle = s.emitstyle;
+        if(this.emitstyle == "pos") {
+            this.x = s.x;
+            this.y = s.y;
+            this.z = s.z;
+        }
         this.radius = s.radius;
+        this.len = s.len;
         this.ignore = s.ignore;
         this.channel = s.channel;
         this.visibility = s.visibility;
         this.colour = s.colour;
-        this.hitcount = s.hitcount;
     }
     emit() {
-        let hits = [];
+        let origin;
+        let direction;
+        if(this.emitstyle == "cam") {
+            origin = camera.position.add(camera.getForwardRay().direction.scale(0)); // Move 1 unit forward
+            direction = camera.getForwardRay().direction;
+        } else if(this.emitstyle == "pos") {
+            origin = new BABYLON.Vector3(this.x, this.y, this.z);
+            direction = origin.getForwardRay().direction;
+        }
+        const length = s.len; // 3; // Max interaction distance
+        const ray = new BABYLON.Ray(origin, direction, length);
+        const hit = scene.pickWithRay(ray);
+        return hit.pickedMesh;
     }
 }
 class ParticleEmitter {
