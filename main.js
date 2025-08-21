@@ -238,20 +238,45 @@ TF.Merc.Spy = class extends TF.Merc {
         });
     }
 }
-TF.Merc.AI = class extends TF.Merc {
+TF.Merc.AI = class {
     constructor(s) {
-        super({
-            "name": TF.Merc.BotNames[Math.floor(Math.random() * TF.Merc.BotNames.length)],
-            "mdl": null,
-            "loadout": { ...TF.Merc.MercClasses[Math.floor(Math.random() * TF.Merc.MercClasses.length)].defaultLoadout },
-            "x": s.x,
-            "y": s.y,
-            "z": s.z,
-            "jumpSpeed": 0,
-            "moveSpeed": 0
+        this.name = s.name;
+        this.mdl = s.mdl;
+        this.primary = new s.loadout.primary;
+        this.secondary = new s.loadout.secondary;
+        this.melee = new s.loadout.melee;
+        this.health = s.health;
+        this.x = s.x;
+        this.y = s.y;
+        this.z = s.z;
+        this.velocity = { x: 0, y: 0, z: 0 };
+        this.gravity = 0.05;
+        this.gravSpeed = 0;
+        this.jumpSpeed = s.jumpSpeed;
+        this.moveSpeed = s.moveSpeed;
+        this.update = s.update;
+        this.grounded = true;
+        this.equipped = this.primary;
+        this.mesh = BABYLON.MeshBuilder.CreateCapsule("player", { height: 2, radius: 0.5 }, scene);
+        this.mesh.position = new BABYLON.Vector3(0, 5, 0);
+        this.mesh.physicsImpostor = new BABYLON.PhysicsImpostor(
+            this.mesh,
+            BABYLON.PhysicsImpostor.BoxImpostor,
+            { mass: 1, restitution: 0.1 },
+            scene
+        );
+        //this.mesh.physicsImpostor.setAngularFactor(new BABYLON.Vector3(0, 1, 0));
+        // aggregate wraps physics + mesh
+        // const agg = new BABYLON.PhysicsAggregate(this.mesh, BABYLON.PhysicsShapeType.CAPSULE, { mass: 1, restitution: 0.1 }, scene);
+        // lock tilt
+        // agg.body.setAngularFactor(new BABYLON.Vector3(0, 1, 0));
+        this.mesh.physicsImpostor.registerOnPhysicsCollide(ground.physicsImpostor, () => {
+            this.isGrounded = true; // Allow jumping when on the ground
         });
+        this.isGrounded = false;
     }
-    update() {
+    tick() {
+        this.update();
         /*
         exec steps:
         1. Determine role (based on class)
@@ -259,8 +284,202 @@ TF.Merc.AI = class extends TF.Merc {
         3. Determine goals (based on gamemode)
         4. Determine team hints (possible spies, known sentry gun locations, usw)
         5. Determine if enemies are seen (if so, get locations)
-        6. Determine next steps
+        6. Determine next steps (capture, attack, usw)
         */
+    }
+    hurt(d) {
+        this.health -= d;
+        if(this.health <= 0) this.kill();
+    }
+    kill() {
+        this.mesh.dispose();
+    }
+    // update() {
+    //     this.gravSpeed += this.gravity;
+    //     this.y += this.gravSpeed;
+    // }
+    // jump() {
+    //     this.velocity.y = this.gravSpeed + this.jumpSpeed;
+    // }
+}
+TF.Merc.AI.Scout = class extends TF.Merc.AI {
+    static defaultLoadout = {
+        "primary": TF.Weapon.Scattergun,
+        "secondary": null,
+        "melee": null
+    };
+    constructor(s) {
+        super({
+            "name": "Scout",
+            "mdl": null,
+            "loadout": { ...TF.Merc.Scout.defaultLoadout },
+            "x": s.x,
+            "y": s.y,
+            "z": s.z,
+            "jumpSpeed": 0.5,
+            "moveSpeed": 2,
+            "update": () => {}
+        });
+    }
+}
+TF.Merc.AI.Soldier = class extends TF.Merc.AI {
+    static defaultLoadout = {
+        "primary": TF.Weapon.RocketLauncher,
+        "secondary": TF.Weapon.Shotgun,
+        "melee": TF.Weapon.Shovel
+    };
+    constructor(s) {
+        super({
+            "name": "Soldier",
+            "mdl": null,
+            "loadout": { ...TF.Merc.Soldier.defaultLoadout },
+            "x": s.x,
+            "y": s.y,
+            "z": s.z,
+            "jumpSpeed": 0.5,
+            "moveSpeed": 0.6,
+            "update": () => {}
+        });
+    }
+}
+TF.Merc.AI.Pyro = class extends TF.Merc.AI {
+    static defaultLoadout = {
+        "primary": TF.Weapon.Flamethrower,
+        "secondary": TF.Weapon.Shotgun,
+        "melee": null
+    };
+    constructor(s) {
+        super({
+            "name": "Pyro",
+            "mdl": null,
+            "loadout": { ...TF.Merc.Pyro.defaultLoadout },
+            "x": s.x,
+            "y": s.y,
+            "z": s.z,
+            "jumpSpeed": 0.5,
+            "moveSpeed": 0.75,
+            "update": () => {}
+        });
+    }
+}
+TF.Merc.AI.Demoman = class extends TF.Merc.AI {
+    static defaultLoadout = {
+        "primary": TF.Weapon.GrenadeLauncher,
+        "secondary": null,
+        "melee": null
+    };
+    constructor(s) {
+        super({
+            "name": "Demoman",
+            "mdl": null,
+            "loadout": { ...TF.Merc.Demoman.defaultLoadout },
+            "x": s.x,
+            "y": s.y,
+            "z": s.z,
+            "jumpSpeed": 0.5,
+            "moveSpeed": 0.6,
+            "update": () => {}
+        });
+    }
+}
+TF.Merc.AI.Heavy = class extends TF.Merc.AI {
+    static defaultLoadout = {
+        "primary": TF.Weapon.Minigun,
+        "secondary": TF.Weapon.Shotgun,
+        "melee": null
+    };
+    constructor(s) {
+        super({
+            "name": "Heavy",
+            "mdl": null,
+            "loadout": { ...TF.Merc.Heavy.defaultLoadout },
+            "x": s.x,
+            "y": s.y,
+            "z": s.z,
+            "jumpSpeed": 0.5,
+            "moveSpeed": 0.35,
+            "update": () => {}
+        });
+    }
+}
+TF.Merc.AI.Engineer = class extends TF.Merc.AI {
+    static defaultLoadout = {
+        "primary": TF.Weapon.Shotgun,
+        "secondary": null,
+        "melee": null
+    };
+    constructor(s) {
+        super({
+            "name": "",
+            "mdl": null,
+            "loadout": { ...TF.Merc.Engineer.defaultLoadout },
+            "x": s.x,
+            "y": s.y,
+            "z": s.z,
+            "jumpSpeed": 0.5,
+            "moveSpeed": 0.75,
+            "update": () => {}
+        });
+    }
+}
+TF.Merc.AI.Medic = class extends TF.Merc.AI {
+    static defaultLoadout = {
+        "primary": TF.Weapon.SyringeGun,
+        "secondary": null,
+        "melee": null
+    };
+    constructor(s) {
+        super({
+            "name": "",
+            "mdl": null,
+            "loadout": { ...TF.Merc.Medic.defaultLoadout },
+            "x": s.x,
+            "y": s.y,
+            "z": s.z,
+            "jumpSpeed": 0.5,
+            "moveSpeed": 0.75,
+            "update": () => {}
+        });
+    }
+}
+TF.Merc.AI.Sniper = class extends TF.Merc.AI {
+    static defaultLoadout = {
+        "primary": TF.Weapon.SniperRifle,
+        "secondary": null,
+        "melee": null
+    };
+    constructor(s) {
+        super({
+            "name": "",
+            "mdl": null,
+            "loadout": { ...TF.Merc.Sniper.defaultLoadout },
+            "x": s.x,
+            "y": s.y,
+            "z": s.z,
+            "jumpSpeed": 0.5,
+            "moveSpeed": 0.75,
+            "update": () => {}
+        });
+    }
+}
+TF.Merc.AI.Spy = class extends TF.Merc.AI {
+    static defaultLoadout = {
+        "primary": TF.Weapon.Revolver,
+        "secondary": null,
+        "melee": null
+    };
+    constructor(s) {
+        super({
+            "name": "",
+            "mdl": null,
+            "loadout": { ...TF.Merc.Spy.defaultLoadout },
+            "x": s.x,
+            "y": s.y,
+            "z": s.z,
+            "jumpSpeed": 0.5,
+            "moveSpeed": 0.75,
+            "update": () => {}
+        });
     }
 }
 
@@ -821,6 +1040,7 @@ TF.Channel.ScreenComponent = class extends TF.Channel {}
 TF.AI = class {
     constructor(s) {
         this.name = s.name;
+        this.action = s.action;
     }
 }
 
