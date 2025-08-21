@@ -275,7 +275,7 @@ TF.Merc.AI = class {
         });
         this.isGrounded = false;
         this.components = {};
-        this.components.vision = new TF.AI.Vision();
+        this.components.vision = new TF.AI.Vision(this);
         this.components.hearing = new TF.AI.Hearing();
         this.goal = null;
     }
