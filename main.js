@@ -1078,6 +1078,21 @@ TF.AI.Vision = class extends TF.AI {
 }
 TF.AI.Hearing = class extends TF.AI {}
 
+TF.Server = class {
+    constructor() {}
+    changeMap(ref) {}
+}
+
+TF.Map = class {
+    constructor(s) {
+        this.name = s.name;
+        this.objects = s.objects;
+        this.mode = s.mode;
+    }
+    build() {}
+}
+TF.Map.BadWater = class extends TF.Map {}
+
 class RaycastEmitter {
     constructor(s) {
         this.emitstyle = s.emitstyle;
