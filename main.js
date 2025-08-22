@@ -1069,7 +1069,7 @@ TF.AI.Vision = class extends TF.AI {
             "name": "Vision",
             "action": () => {
                 const mesh = this.ref.mesh;
-                const raycaster = new RaycastEmitter({ "emitystyle": "cam", "radius": 5, "ignore": [], "channel": TF.Channel.Raycast, "visibility": 0, "colour": TF.Colour.Red });
+                const raycaster = new RaycastEmitter({ "emitystyle": "cam", "radius": 5, "len": Infinity, "ignore": [], "channel": TF.Channel.Raycast, "visibility": 0, "colour": TF.Colour.Red });
                 return raycaster.emit();
             },
             "ref": r
