@@ -22,3 +22,7 @@ tf-web-early - TF web early access build. - <a href="" download>download</a>
 
 # Annoucements
 [v0.1.6+] If you haven't upgraded to the newest version, upgrade now! "kit" is now deprecated and replaced with "loadout". The AI has been further updated. The AI patch for 0.1.7 should be released in the coming weeks to play a basic game against an AI.
+
+# Packages
+[in development] RTD - The classic RTD plugin. - <a href="" download>download</a>
+[in development] Class Wars - The classic Class Wars plugin. - <a href="" download>download</a>
