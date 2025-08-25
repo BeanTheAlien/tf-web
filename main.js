@@ -1093,6 +1093,11 @@ TF.Map = class {
 }
 TF.Map.BadWater = class extends TF.Map {}
 
+TF.Loadout = class {
+    constructor() {}
+    setup() {}
+}
+
 class RaycastEmitter {
     constructor(s) {
         this.emitstyle = s.emitstyle;
@@ -1236,6 +1241,8 @@ var projectiles = [];
 var env = [];
 var players = [player];
 var ai = [];
+
+var keybinds = {};
 
 scene.onBeforeRenderObservable.add(() => {
     players.forEach(p => {
