@@ -508,6 +508,7 @@ TF.Weapon = class {
     }
 }
 TF.Weapon.Scattergun = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Scout, "slot": "primary" }];
     constructor() {
         super({
             "name": "",
@@ -516,7 +517,7 @@ TF.Weapon.Scattergun = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": [{ "name": TF.Merc.Scout, "slot": "primary" }]
+            "equipby": TF.Weapon.Scattergun.equipby
         });
         this.shells = 6;
         this.mag = 6;
@@ -524,6 +525,7 @@ TF.Weapon.Scattergun = class extends TF.Weapon {
     }
 }
 TF.Weapon.RocketLauncher = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Soldier, "slot": "primary" }];
     constructor() {
         super({
             "name": "Rocket Launcher",
@@ -555,7 +557,7 @@ TF.Weapon.RocketLauncher = class extends TF.Weapon {
             },
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": [{ "name": TF.Merc.Soldier, "slot": "primary" }]
+            "equipby": TF.Weapon.RocketLauncher.equipby
         });
         this.shells = 4;
         this.mag = 4;
@@ -563,6 +565,7 @@ TF.Weapon.RocketLauncher = class extends TF.Weapon {
     }
 }
 TF.Weapon.Flamethrower = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Pyro, "slot": "primary" }];
     constructor() {
         super({
             "name": "Flamethrower",
@@ -601,12 +604,13 @@ TF.Weapon.Flamethrower = class extends TF.Weapon {
                 projectiles.push(new TF.Projectile.Airblast({ "x": spawnPos.x, "y": spawnPos.y, "z": spawnPos.z, "xrot": camera.rotation.x, "yrot": camera.rotation.y, "zrot": camera.rotation.z }));
             },
             "attackfailsound": null,
-            "equipby": [{ "name": TF.Merc.Pyro, "slot": "primary" }]
+            "equipby": TF.Weapon.Flamethrower.equipby
         });
         this.ammo = 200;
     }
 }
 TF.Weapon.GrenadeLauncher = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Demoman, "slot": "primary" }];
     constructor() {
         super({
             "name": "",
@@ -615,7 +619,7 @@ TF.Weapon.GrenadeLauncher = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": [{ "name": TF.Merc.Demoman, "slot": "primary" }]
+            "equipby": TF.Weapon.GrenadeLauncher.equipby
         });
         this.shells = 6;
         this.mag = 6;
@@ -623,6 +627,7 @@ TF.Weapon.GrenadeLauncher = class extends TF.Weapon {
     }
 }
 TF.Weapon.Minigun = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Heavy, "slot": "primary" }];
     constructor() {
         super({
             "name": "",
@@ -631,12 +636,13 @@ TF.Weapon.Minigun = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": [{ "name": TF.Merc.Heavy, "slot": "primary" }]
+            "equipby": TF.Weapon.Minigun.equipby
         });
         this.ammo = 200;
     }
 }
 TF.Weapon.Shotgun = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Engineer, "slot": "primary" }, { "name": TF.Merc.Soldier, "slot": "secondary" }, { "name": TF.Merc.Pyro, "slot": "secondary" }, { "name": TF.Merc.Heavy, "slot": "secondary" }];
     constructor() {
         super({
             "name": "",
@@ -645,7 +651,7 @@ TF.Weapon.Shotgun = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": [{ "name": TF.Merc.Engineer, "slot": "primary" }, { "name": TF.Merc.Soldier, "slot": "secondary" }, { "name": TF.Merc.Pyro, "slot": "secondary" }, { "name": TF.Merc.Heavy, "slot": "secondary" }]
+            "equipby": TF.Weapon.Shotgun
         });
         this.shells = 6;
         this.mag = 6;
