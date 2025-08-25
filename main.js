@@ -516,7 +516,7 @@ TF.Weapon.Scattergun = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": [TF.Merc.Scout]
+            "equipby": [{ "name": TF.Merc.Scout, "slot": "primary" }]
         });
         this.shells = 6;
         this.mag = 6;
@@ -555,7 +555,7 @@ TF.Weapon.RocketLauncher = class extends TF.Weapon {
             },
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": [TF.Merc.Soldier]
+            "equipby": [{ "name": TF.Merc.Soldier, "slot": "primary" }]
         });
         this.shells = 4;
         this.mag = 4;
@@ -601,7 +601,7 @@ TF.Weapon.Flamethrower = class extends TF.Weapon {
                 projectiles.push(new TF.Projectile.Airblast({ "x": spawnPos.x, "y": spawnPos.y, "z": spawnPos.z, "xrot": camera.rotation.x, "yrot": camera.rotation.y, "zrot": camera.rotation.z }));
             },
             "attackfailsound": null,
-            "equipby": [TF.Merc.Pyro]
+            "equipby": [{ "name": TF.Merc.Pyro, "slot": "primary" }]
         });
         this.ammo = 200;
     }
@@ -615,7 +615,7 @@ TF.Weapon.GrenadeLauncher = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": [TF.Merc.Demoman]
+            "equipby": [{ "name": TF.Merc.Demoman, "slot": "primary" }]
         });
         this.shells = 6;
         this.mag = 6;
@@ -631,7 +631,7 @@ TF.Weapon.Minigun = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": [TF.Merc.Heavy]
+            "equipby": [{ "name": TF.Merc.Heavy, "slot": "primary" }]
         });
         this.ammo = 200;
     }
@@ -645,7 +645,7 @@ TF.Weapon.Shotgun = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": [TF.Merc.Engineer, TF.Merc.Soldier, TF.Merc.Pyro, TF.Merc.Heavy]
+            "equipby": [{ "name": TF.Merc.Engineer, "slot": "primary" }, { "name": TF.Merc.Soldier, "slot": "secondary" }, { "name": TF.Merc.Pyro, "slot": "secondary" }, { "name": TF.Merc.Heavy, "slot": "secondary" }]
         });
         this.shells = 6;
         this.mag = 6;
@@ -661,7 +661,7 @@ TF.Weapon.SyringeGun = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": [TF.Merc.Medic]
+            "equipby": [{ "name": TF.Merc.Medic, "slot": "primary" }]
         });
         this.shells = 40;
         this.mag = 40;
@@ -677,7 +677,7 @@ TF.Weapon.SniperRifle = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": [TF.Merc.Sniper]
+            "equipby": [{ "name": TF.Merc.Sniper, "slot": "primary" }]
         });
         this.ammo = 25;
     }
@@ -691,7 +691,7 @@ TF.Weapon.Revolver = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": [TF.Merc.Spy]
+            "equipby": [{ "name": TF.Merc.Spy, "slot": "primary" }]
         });
         this.shells = 6;
         this.mag = 6;
@@ -707,7 +707,7 @@ TF.Weapon.Shovel = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": [TF.Merc.Soldier]
+            "equipby": [{ "name": TF.Merc.Soldier, "slot": "melee" }]
         });
     }
 }
@@ -1094,8 +1094,10 @@ TF.Map = class {
 TF.Map.BadWater = class extends TF.Map {}
 
 TF.Loadout = class {
-    constructor() {}
-    setup() {}
+    constructor(s) {
+        this.equipclass = s.equipclass;
+    }
+    menu() {}
 }
 
 class RaycastEmitter {
