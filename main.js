@@ -1130,7 +1130,11 @@ TF.Loadout = class {
                 //
             }
             const id = e.target.id;
-            const execs = {};
+            const execs = {
+                "slot-primary": () => makeEquipMenu(),
+                "slot-secondary": () => makeEquipMenu(),
+                "slot-melee": () => makeEquipMenu()
+            };
             execs[id]();
         }
         slotprimary.innerHTML = player.primary;
