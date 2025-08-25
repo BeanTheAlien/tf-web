@@ -1126,8 +1126,12 @@ TF.Loadout = class {
         const slotmelee = document.createElement("div");
         slots.innerHTML = `${slotprimary}<br>${slotsecondary}<br>${slotmelee}`;
         const equip = (e) => {
+            const makeEquipMenu = (t) => {
+                //
+            }
+            const id = e.target.id;
             const execs = {};
-            execs[e.target.id]();
+            execs[id]();
         }
         slotprimary.innerHTML = player.primary;
         slotsecondary.innerHTML = player.secondary;
