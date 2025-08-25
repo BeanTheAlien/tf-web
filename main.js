@@ -1125,12 +1125,6 @@ TF.Loadout = class {
         const slotsecondary = document.createElement("div");
         const slotmelee = document.createElement("div");
         slots.innerHTML = `${slotprimary}<br>${slotsecondary}<br>${slotmelee}`;
-        const equip = (e) => {
-            const id = e.event.id;
-        }
-        slotprimary.addEventListener("click", equip);
-        slotsecondary.addEventListener("click", equip);
-        slotmelee.addEventListener("click", equip);
     }
 }
 
