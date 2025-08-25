@@ -491,6 +491,18 @@ TF.Merc.AI.Spy = class extends TF.Merc.AI {
 }
 
 TF.Weapon = class {
+    static weapons = [
+        TF.Weapon.Scattergun,
+        TF.Weapon.RocketLauncher,
+        TF.Weapon.Flamethrower,
+        TF.Weapon.GrenadeLauncher,
+        TF.Weapon.Minigun,
+        TF.Weapon.Shotgun,
+        TF.Weapon.SyringeGun,
+        TF.Weapon.SniperRifle,
+        TF.Weapon.Revolver,
+        TF.Weapon.Shovel
+    ];
     constructor(s) {
         this.name = s.name;
         this.mdl = s.mdl;
@@ -651,7 +663,7 @@ TF.Weapon.Shotgun = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": TF.Weapon.Shotgun
+            "equipby": TF.Weapon.Shotgun.equipby
         });
         this.shells = 6;
         this.mag = 6;
@@ -659,6 +671,7 @@ TF.Weapon.Shotgun = class extends TF.Weapon {
     }
 }
 TF.Weapon.SyringeGun = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Medic, "slot": "primary" }];
     constructor() {
         super({
             "name": "",
@@ -667,7 +680,7 @@ TF.Weapon.SyringeGun = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": [{ "name": TF.Merc.Medic, "slot": "primary" }]
+            "equipby": TF.Weapon.SyringeGun.equipby
         });
         this.shells = 40;
         this.mag = 40;
@@ -675,6 +688,7 @@ TF.Weapon.SyringeGun = class extends TF.Weapon {
     }
 }
 TF.Weapon.SniperRifle = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Sniper, "slot": "primary" }];
     constructor() {
         super({
             "name": "",
@@ -683,12 +697,13 @@ TF.Weapon.SniperRifle = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": [{ "name": TF.Merc.Sniper, "slot": "primary" }]
+            "equipby": TF.Weapon.SniperRifle.equipby
         });
         this.ammo = 25;
     }
 }
 TF.Weapon.Revolver = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Spy, "slot": "primary" }];
     constructor() {
         super({
             "name": "",
@@ -697,7 +712,7 @@ TF.Weapon.Revolver = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": [{ "name": TF.Merc.Spy, "slot": "primary" }]
+            "equipby": TF.Weapon.Revolver.equipby
         });
         this.shells = 6;
         this.mag = 6;
@@ -705,6 +720,7 @@ TF.Weapon.Revolver = class extends TF.Weapon {
     }
 }
 TF.Weapon.Shovel = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Soldier, "slot": "melee" }];
     constructor() {
         super({
             "name": "Shovel",
@@ -713,7 +729,7 @@ TF.Weapon.Shovel = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": [{ "name": TF.Merc.Soldier, "slot": "melee" }]
+            "equipby": TF.Weapon.Shovel.equipby
         });
     }
 }
@@ -1103,7 +1119,19 @@ TF.Loadout = class {
     constructor(s) {
         this.equipclass = s.equipclass;
     }
-    menu() {}
+    menu() {
+        const slots = document.createElement("div");
+        const slotprimary = document.createElement("div");
+        const slotsecondary = document.createElement("div");
+        const slotmelee = document.createElement("div");
+        slots.innerHTML = `${slotprimary}<br>${slotsecondary}<br>${slotmelee}`;
+        const equip = (e) => {
+            const id = e.event.id;
+        }
+        slotprimary.addEventListener("click", equip);
+        slotsecondary.addEventListener("click", equip);
+        slotmelee.addEventListener("click", equip);
+    }
 }
 
 class RaycastEmitter {
