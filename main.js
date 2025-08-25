@@ -1125,6 +1125,9 @@ TF.Loadout = class {
         const slotsecondary = document.createElement("div");
         const slotmelee = document.createElement("div");
         slots.innerHTML = `${slotprimary}<br>${slotsecondary}<br>${slotmelee}`;
+        slotprimary.innerHTML = player.primary;
+        slotsecondary.innerHTML = player.secondary;
+        slotmelee.innerHTML = player.melee;
     }
 }
 
