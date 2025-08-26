@@ -531,7 +531,7 @@ TF.Weapon.Scattergun = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.Scattergun.equipby,
-            "invicon": null
+            "invicon": "missingtexture.png"
         });
         this.shells = 6;
         this.mag = 6;
@@ -572,7 +572,7 @@ TF.Weapon.RocketLauncher = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.RocketLauncher.equipby,
-            "invicon": null
+            "invicon": "missingtexture.png"
         });
         this.shells = 4;
         this.mag = 4;
@@ -620,7 +620,7 @@ TF.Weapon.Flamethrower = class extends TF.Weapon {
             },
             "attackfailsound": null,
             "equipby": TF.Weapon.Flamethrower.equipby,
-            "invicon": null
+            "invicon": "missingtexture.png"
         });
         this.ammo = 200;
     }
@@ -636,7 +636,7 @@ TF.Weapon.GrenadeLauncher = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.GrenadeLauncher.equipby,
-            "invicon": null
+            "invicon": "missingtexture.png"
         });
         this.shells = 6;
         this.mag = 6;
@@ -654,7 +654,7 @@ TF.Weapon.Minigun = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.Minigun.equipby,
-            "invicon": null
+            "invicon": "missingtexture.png"
         });
         this.ammo = 200;
     }
@@ -670,7 +670,7 @@ TF.Weapon.Shotgun = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.Shotgun.equipby,
-            "invicon": null
+            "invicon": "missingtexture.png"
         });
         this.shells = 6;
         this.mag = 6;
@@ -688,7 +688,7 @@ TF.Weapon.SyringeGun = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.SyringeGun.equipby,
-            "invicon": null
+            "invicon": "missingtexture.png"
         });
         this.shells = 40;
         this.mag = 40;
@@ -706,7 +706,7 @@ TF.Weapon.SniperRifle = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.SniperRifle.equipby,
-            "invicon": null
+            "invicon": "missingtexture.png"
         });
         this.ammo = 25;
     }
@@ -722,7 +722,7 @@ TF.Weapon.Revolver = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.Revolver.equipby,
-            "invicon": null
+            "invicon": "missingtexture.png"
         });
         this.shells = 6;
         this.mag = 6;
@@ -740,7 +740,7 @@ TF.Weapon.Shovel = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.Shovel.equipby,
-            "invicon": null
+            "invicon": "missingtexture.png"
         });
     }
 }
