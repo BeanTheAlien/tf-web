@@ -1126,14 +1126,18 @@ TF.Loadout = class {
         const slotmelee = document.createElement("div");
         slots.innerHTML = `${slotprimary}<br>${slotsecondary}<br>${slotmelee}`;
         const equip = (e) => {
-            const makeEquipMenu = (t) => {
-                //
+            const makeEquipMenu = (s) => {
+                const emenu = document.createElement("div");
+                const ebls = TF.Weapon.weapons.filter(w => w.equipby.some(s => s.name == this.equipclass && s.slot == s));
+                ebls.forEach(e => {
+                    emenu.innerHTML += "";
+                });
             }
             const id = e.target.id;
             const execs = {
-                "slot-primary": () => makeEquipMenu(),
-                "slot-secondary": () => makeEquipMenu(),
-                "slot-melee": () => makeEquipMenu()
+                "slot-primary": () => makeEquipMenu("primary"),
+                "slot-secondary": () => makeEquipMenu("secondary"),
+                "slot-melee": () => makeEquipMenu("melee")
             };
             execs[id]();
         }
