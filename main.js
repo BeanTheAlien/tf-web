@@ -1128,7 +1128,7 @@ TF.Loadout = class {
         const equip = (e) => {
             const makeEquipMenu = (s) => {
                 const emenu = document.createElement("div");
-                const ebls = TF.Weapon.weapons.filter(w => w.equipby.some(s => s.name == this.equipclass && s.slot == s));
+                const ebls = TF.Weapon.weapons.map(w => w.equipby.filter(e => {}));
                 ebls.forEach(e => {
                     emenu.innerHTML += "";
                 });
