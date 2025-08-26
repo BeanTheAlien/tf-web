@@ -511,7 +511,7 @@ TF.Weapon = class {
         this.attackalt = s.attackalt;
         this.attackfailsound = s.attackfailsound;
         this.equipby = s.equipby;
-        this.displayimg;
+        this.invicon;
     }
     atk1() {
         this.attack();
@@ -531,7 +531,7 @@ TF.Weapon.Scattergun = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.Scattergun.equipby,
-            "displayimg": null
+            "invicon": null
         });
         this.shells = 6;
         this.mag = 6;
@@ -572,7 +572,7 @@ TF.Weapon.RocketLauncher = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.RocketLauncher.equipby,
-            "displayimg": null
+            "invicon": null
         });
         this.shells = 4;
         this.mag = 4;
@@ -620,7 +620,7 @@ TF.Weapon.Flamethrower = class extends TF.Weapon {
             },
             "attackfailsound": null,
             "equipby": TF.Weapon.Flamethrower.equipby,
-            "displayimg": null
+            "invicon": null
         });
         this.ammo = 200;
     }
@@ -636,7 +636,7 @@ TF.Weapon.GrenadeLauncher = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.GrenadeLauncher.equipby,
-            "displayimg": null
+            "invicon": null
         });
         this.shells = 6;
         this.mag = 6;
@@ -654,7 +654,7 @@ TF.Weapon.Minigun = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.Minigun.equipby,
-            "displayimg": null
+            "invicon": null
         });
         this.ammo = 200;
     }
@@ -670,7 +670,7 @@ TF.Weapon.Shotgun = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.Shotgun.equipby,
-            "displayimg": null
+            "invicon": null
         });
         this.shells = 6;
         this.mag = 6;
@@ -688,7 +688,7 @@ TF.Weapon.SyringeGun = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.SyringeGun.equipby,
-            "displayimg": null
+            "invicon": null
         });
         this.shells = 40;
         this.mag = 40;
@@ -706,7 +706,7 @@ TF.Weapon.SniperRifle = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.SniperRifle.equipby,
-            "displayimg": null
+            "invicon": null
         });
         this.ammo = 25;
     }
@@ -722,7 +722,7 @@ TF.Weapon.Revolver = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.Revolver.equipby,
-            "displayimg": null
+            "invicon": null
         });
         this.shells = 6;
         this.mag = 6;
@@ -740,7 +740,7 @@ TF.Weapon.Shovel = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.Shovel.equipby,
-            "displayimg": null
+            "invicon": null
         });
     }
 }
@@ -1145,7 +1145,7 @@ TF.Loadout = class {
                 emenu.className = "ebslot";
                 const ebls = TF.Weapon.weapons.map(w => w.equipby.filter(e => e.name == this.equipclass && e.slot == s));
                 ebls.forEach(e => {
-                    emenu.innerHTML += `<img src="${e.displayimg}"><br><p>${e.name}</p>`;
+                    emenu.innerHTML += `<img src="${e.invicon}"><br><p>${e.name}</p>`;
                 });
             }
             const id = e.target.id;
