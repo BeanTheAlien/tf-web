@@ -511,6 +511,7 @@ TF.Weapon = class {
         this.attackalt = s.attackalt;
         this.attackfailsound = s.attackfailsound;
         this.equipby = s.equipby;
+        this.displayimg;
     }
     atk1() {
         this.attack();
@@ -529,7 +530,8 @@ TF.Weapon.Scattergun = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": TF.Weapon.Scattergun.equipby
+            "equipby": TF.Weapon.Scattergun.equipby,
+            "displayimg": null
         });
         this.shells = 6;
         this.mag = 6;
@@ -569,7 +571,8 @@ TF.Weapon.RocketLauncher = class extends TF.Weapon {
             },
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": TF.Weapon.RocketLauncher.equipby
+            "equipby": TF.Weapon.RocketLauncher.equipby,
+            "displayimg": null
         });
         this.shells = 4;
         this.mag = 4;
@@ -616,7 +619,8 @@ TF.Weapon.Flamethrower = class extends TF.Weapon {
                 projectiles.push(new TF.Projectile.Airblast({ "x": spawnPos.x, "y": spawnPos.y, "z": spawnPos.z, "xrot": camera.rotation.x, "yrot": camera.rotation.y, "zrot": camera.rotation.z }));
             },
             "attackfailsound": null,
-            "equipby": TF.Weapon.Flamethrower.equipby
+            "equipby": TF.Weapon.Flamethrower.equipby,
+            "displayimg": null
         });
         this.ammo = 200;
     }
@@ -631,7 +635,8 @@ TF.Weapon.GrenadeLauncher = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": TF.Weapon.GrenadeLauncher.equipby
+            "equipby": TF.Weapon.GrenadeLauncher.equipby,
+            "displayimg": null
         });
         this.shells = 6;
         this.mag = 6;
@@ -648,7 +653,8 @@ TF.Weapon.Minigun = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": TF.Weapon.Minigun.equipby
+            "equipby": TF.Weapon.Minigun.equipby,
+            "displayimg": null
         });
         this.ammo = 200;
     }
@@ -663,7 +669,8 @@ TF.Weapon.Shotgun = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": TF.Weapon.Shotgun.equipby
+            "equipby": TF.Weapon.Shotgun.equipby,
+            "displayimg": null
         });
         this.shells = 6;
         this.mag = 6;
@@ -680,7 +687,8 @@ TF.Weapon.SyringeGun = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": TF.Weapon.SyringeGun.equipby
+            "equipby": TF.Weapon.SyringeGun.equipby,
+            "displayimg": null
         });
         this.shells = 40;
         this.mag = 40;
@@ -697,7 +705,8 @@ TF.Weapon.SniperRifle = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": TF.Weapon.SniperRifle.equipby
+            "equipby": TF.Weapon.SniperRifle.equipby,
+            "displayimg": null
         });
         this.ammo = 25;
     }
@@ -712,7 +721,8 @@ TF.Weapon.Revolver = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": TF.Weapon.Revolver.equipby
+            "equipby": TF.Weapon.Revolver.equipby,
+            "displayimg": null
         });
         this.shells = 6;
         this.mag = 6;
@@ -729,7 +739,8 @@ TF.Weapon.Shovel = class extends TF.Weapon {
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": TF.Weapon.Shovel.equipby
+            "equipby": TF.Weapon.Shovel.equipby,
+            "displayimg": null
         });
     }
 }
@@ -1113,7 +1124,7 @@ TF.Map = class {
     }
     build() {}
 }
-TF.Map.BadWater = class extends TF.Map {}
+TF.Map.Badwater = class extends TF.Map {}
 
 TF.Loadout = class {
     constructor(s) {
@@ -1131,9 +1142,10 @@ TF.Loadout = class {
         const equip = (e) => {
             const makeEquipMenu = (s) => {
                 const emenu = document.createElement("div");
+                emenu.className = "ebslot";
                 const ebls = TF.Weapon.weapons.map(w => w.equipby.filter(e => e.name == this.equipclass && e.slot == s));
                 ebls.forEach(e => {
-                    emenu.innerHTML += "";
+                    emenu.innerHTML += `<img src="${e.displayimg}"><br><p>${e.name}</p>`;
                 });
             }
             const id = e.target.id;
