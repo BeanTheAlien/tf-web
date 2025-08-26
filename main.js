@@ -1165,6 +1165,14 @@ TF.Loadout = class {
     }
 }
 
+TF.Console = class {
+    constructor(s) {
+        this.x = s.x;
+        this.y = s.y;
+        this.state = s.state;
+    }
+}
+
 class RaycastEmitter {
     constructor(s) {
         this.emitstyle = s.emitstyle;
