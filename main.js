@@ -471,7 +471,7 @@ TF.Weapon.Scattergun = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Scout, "slot": "primary" }];
     constructor() {
         super({
-            "name": "",
+            "name": "Scattergun",
             "mdl": null,
             "atkdelay": 0,
             "attack": () => {},
@@ -579,7 +579,7 @@ TF.Weapon.GrenadeLauncher = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Demoman, "slot": "primary" }];
     constructor() {
         super({
-            "name": "",
+            "name": "Grenade Launcher",
             "mdl": null,
             "atkdelay": 0,
             "attack": () => {},
@@ -598,7 +598,7 @@ TF.Weapon.Minigun = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Heavy, "slot": "primary" }];
     constructor() {
         super({
-            "name": "",
+            "name": "Minigun",
             "mdl": null,
             "atkdelay": 0,
             "attack": () => {},
@@ -615,7 +615,7 @@ TF.Weapon.Shotgun = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Engineer, "slot": "primary" }, { "name": TF.Merc.Soldier, "slot": "secondary" }, { "name": TF.Merc.Pyro, "slot": "secondary" }, { "name": TF.Merc.Heavy, "slot": "secondary" }];
     constructor() {
         super({
-            "name": "",
+            "name": "Shotgun",
             "mdl": null,
             "atkdelay": 0,
             "attack": () => {},
@@ -634,7 +634,7 @@ TF.Weapon.SyringeGun = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Medic, "slot": "primary" }];
     constructor() {
         super({
-            "name": "",
+            "name": "Syringe Gun",
             "mdl": null,
             "atkdelay": 0,
             "attack": () => {},
@@ -653,7 +653,7 @@ TF.Weapon.SniperRifle = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Sniper, "slot": "primary" }];
     constructor() {
         super({
-            "name": "",
+            "name": "Sniper Rifle",
             "mdl": null,
             "atkdelay": 0,
             "attack": () => {},
@@ -673,7 +673,7 @@ TF.Weapon.Revolver = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Spy, "slot": "primary" }];
     constructor() {
         super({
-            "name": "",
+            "name": "Revolver",
             "mdl": null,
             "atkdelay": 0,
             "attack": () => {},
@@ -1091,22 +1091,48 @@ TF.Loadout = class {
         this.equipclass = s.equipclass;
     }
     menu() {
+        document.removeEventListener("click", lock);
+        document.removeEventListener("mousedown", Shoot1);
+        document.removeEventListener("contextmenu", Shoot2);
         const slots = document.createElement("div");
-        const slotprimary = document.createElement("div");
+        const slotprimary = document.createElement("button");
         slotprimary.id = "slot-primary";
-        const slotsecondary = document.createElement("div");
+        const slotsecondary = document.createElement("button");
         slotsecondary.id = "slot-secondary";
-        const slotmelee = document.createElement("div");
+        const slotmelee = document.createElement("button");
         slotmelee.id = "slot-melee";
-        slots.innerHTML = `${slotprimary}<br>${slotsecondary}<br>${slotmelee}`;
+        [slotprimary, document.createElement("br"), slotsecondary, document.createElement("br"), slotmelee].forEach(e => slots.appendChild(e));
         const equip = (e) => {
             const makeEquipMenu = (s) => {
                 const emenu = document.createElement("div");
                 emenu.className = "ebslot";
-                const ebls = TF.Weapon.weapons.map(w => w.equipby.filter(e => e.name == this.equipclass && e.slot == s));
+                const ebls = TF.Weapon.weapons.flatMap(w => w.equipby.filter(e => e.name == this.equipclass && e.slot == s)); // i think the error is here
                 ebls.forEach(e => {
-                    emenu.innerHTML += `<img src="${e.invicon}"><br><p>${e.name}</p>`;
+                    const img = document.createElement("img");
+                    img.src = e.invicon;
+                    const p = document.createElement("p");
+                    p.textContent = e.name.name;
+                    const br = document.createElement("br");
+                    emenu.appendChild(img);
+                    emenu.appendChild(br);
+                    emenu.appendChild(p);
                 });
+                Object.assign(emenu.style, {
+                    position: "fixed",
+                    top: "0",
+                    left: "0",
+                    opacity: "1",
+                    backgroundColor: "rgba(0,0,0,0.8)", // nicer overlay
+                    color: "white",
+                    zIndex: "9999",
+                    width: "100vw",
+                    height: "100vh",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center"
+                });
+                document.body.appendChild(emenu);
             }
             const id = e.target.id;
             const execs = {
@@ -1114,14 +1140,37 @@ TF.Loadout = class {
                 "slot-secondary": () => makeEquipMenu("secondary"),
                 "slot-melee": () => makeEquipMenu("melee")
             };
-            execs[id]();
+            (execs[id])();
         }
-        slotprimary.innerHTML = player.primary;
-        slotsecondary.innerHTML = player.secondary;
-        slotmelee.innerHTML = player.melee;
+        slotprimary.innerHTML = player.primary.name;
+        slotsecondary.innerHTML = player.secondary.name;
+        slotmelee.innerHTML = player.melee.name;
         slotprimary.addEventListener("click", equip);
         slotsecondary.addEventListener("click", equip);
         slotmelee.addEventListener("click", equip);
+        Object.assign(slots.style, {
+            position: "fixed",
+            top: "0",
+            left: "0",
+            opacity: "1",
+            backgroundColor: "rgba(0,0,0,0.8)", // nicer overlay
+            color: "white",
+            zIndex: "9999",
+            width: "100vw",
+            height: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center"
+        });
+        [slotprimary, slotsecondary, slotmelee].forEach(e => Object.assign(e.style, {
+            backgroundColor: "orange",
+            color: "black",
+            width: "20%",
+            height: "20%",
+            pointerEvents: "auto"
+        }));
+        document.body.appendChild(slots);
     }
 }
 
@@ -1230,7 +1279,7 @@ class SoundEmitter {
 
 class Camera {}
 
-TF.Merc.MercClasses = [TF.Merc.Scout, TF.Merc.Soldier, TF.Merc.Pyro, TF.Merc.Demoman, TF.Merc.Heavy, TF.Merc.Engineer, TF.Merc.Medic, TF.Merc.Sniper, TF.Merc.Spy];
+TF.Merc.MercClasses = [ TF.Merc.Scout, TF.Merc.Soldier, TF.Merc.Pyro, TF.Merc.Demoman, TF.Merc.Heavy, TF.Merc.Engineer, TF.Merc.Medic, TF.Merc.Sniper, TF.Merc.Spy ];
 TF.Merc.Scout.defaultLoadout = { "primary": TF.Weapon.Scattergun, "secondary": null, "melee": null };
 TF.Merc.Soldier.defaultLoadout = { "primary": TF.Weapon.RocketLauncher, "secondary": TF.Weapon.Shotgun, "melee": TF.Weapon.Shovel };
 TF.Merc.Pyro.defaultLoadout = { "primary": TF.Weapon.Flamethrower, "secondary": TF.Weapon.Shotgun, "melee": null };
@@ -1300,9 +1349,6 @@ var ai = [];
 
 var keybinds = {};
 
-let l = new TF.Loadout(TF.Merc.Soldier);
-l.menu();
-
 scene.onBeforeRenderObservable.add(() => {
     players.forEach(p => {
         if(p.mesh.rotationQuaternion) {
@@ -1313,14 +1359,14 @@ scene.onBeforeRenderObservable.add(() => {
 });
 
 // Lock Pointer
-function Lock() {
+function lock() {
     if(document.pointerLockElement != canvas) {
         canvas.requestPointerLock();
     }
 }
-document.addEventListener("click", Lock);
+document.addEventListener("click", lock);
 
-function Unlock() {
+function unlock() {
     document.exitPointerLock();
 }
 
@@ -1369,3 +1415,8 @@ engine.runRenderLoop(game);
 
 // Resize Handler
 window.addEventListener("resize", () => engine.resize());
+
+
+let l = new TF.Loadout(TF.Merc.Soldier);
+l.menu();
+engine.stopRenderLoop();
