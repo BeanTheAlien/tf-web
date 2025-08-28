@@ -1230,6 +1230,27 @@ class SoundEmitter {
 
 class Camera {}
 
+TF.Merc.MercClasses = [TF.Merc.Scout, TF.Merc.Soldier, TF.Merc.Pyro, TF.Merc.Demoman, TF.Merc.Heavy, TF.Merc.Engineer, TF.Merc.Medic, TF.Merc.Sniper, TF.Merc.Spy];
+TF.Merc.Scout.defaultLoadout = { "primary": TF.Weapon.Scattergun, "secondary": null, "melee": null };
+TF.Merc.Soldier.defaultLoadout = { "primary": TF.Weapon.RocketLauncher, "secondary": TF.Weapon.Shotgun, "melee": TF.Weapon.Shovel };
+TF.Merc.Pyro.defaultLoadout = { "primary": TF.Weapon.Flamethrower, "secondary": TF.Weapon.Shotgun, "melee": null };
+TF.Merc.Demoman.defaultLoadout = { "primary": TF.Weapon.GrenadeLauncher, "secondary": null, "melee": null };
+TF.Merc.Heavy.defaultLoadout = { "primary": TF.Weapon.Minigun, "secondary": TF.Weapon.Shotgun, "melee": null };
+TF.Merc.Engineer.defaultLoadout = { "primary": TF.Weapon.Shotgun, "secondary": null, "melee": null };
+TF.Merc.Medic.defaultLoadout = { "primary": TF.Weapon.SyringeGun, "secondary": null, "melee": null };
+TF.Merc.Sniper.defaultLoadout = { "primary": TF.Weapon.SniperRifle, "secondary": null, "melee": null };
+TF.Merc.Spy.defaultLoadout = { "primary": TF.Weapon.Revolver, "secondary": null, "melee": null };
+TF.Merc.AI.Scout.defaultLoadout = TF.Merc.Scout.defaultLoadout;
+TF.Merc.AI.Soldier.defaultLoadout = TF.Merc.Soldier.defaultLoadout;
+TF.Merc.AI.Pyro.defaultLoadout = TF.Merc.Pyro.defaultLoadout;
+TF.Merc.AI.Demoman.defaultLoadout = TF.Merc.Demoman.defaultLoadout;
+TF.Merc.AI.Heavy.defaultLoadout = TF.Merc.Heavy.defaultLoadout;
+TF.Merc.AI.Engineer.defaultLoadout = TF.Merc.Engineer.defaultLoadout;
+TF.Merc.AI.Medic.defaultLoadout = TF.Merc.Medic.defaultLoadout;
+TF.Merc.AI.Sniper.defaultLoadout = TF.Merc.Sniper.defaultLoadout;
+TF.Merc.AI.Spy.defaultLoadout = TF.Merc.Spy.defaultLoadout;
+TF.Weapon.weapons = [ TF.Weapon.Scattergun, TF.Weapon.RocketLauncher, TF.Weapon.Flamethrower, TF.Weapon.GrenadeLauncher, TF.Weapon.Minigun, TF.Weapon.Shotgun, TF.Weapon.SyringeGun, TF.Weapon.SniperRifle, TF.Weapon.Revolver, TF.Weapon.Shovel ];
+
 const canvas = document.getElementById("gameCanvas");
 
 function game() {
@@ -1278,27 +1299,6 @@ var players = [player];
 var ai = [];
 
 var keybinds = {};
-
-TF.Merc.MercClasses = [TF.Merc.Scout, TF.Merc.Soldier, TF.Merc.Pyro, TF.Merc.Demoman, TF.Merc.Heavy, TF.Merc.Engineer, TF.Merc.Medic, TF.Merc.Sniper, TF.Merc.Spy];
-TF.Merc.Scout.defaultLoadout = { "primary": TF.Weapon.Scattergun, "secondary": null, "melee": null };
-TF.Merc.Soldier.defaultLoadout = { "primary": TF.Weapon.RocketLauncher, "secondary": TF.Weapon.Shotgun, "melee": TF.Weapon.Shovel };
-TF.Merc.Pyro.defaultLoadout = { "primary": TF.Weapon.Flamethrower, "secondary": TF.Weapon.Shotgun, "melee": null };
-TF.Merc.Demoman.defaultLoadout = { "primary": TF.Weapon.GrenadeLauncher, "secondary": null, "melee": null };
-TF.Merc.Heavy.defaultLoadout = { "primary": TF.Weapon.Minigun, "secondary": TF.Weapon.Shotgun, "melee": null };
-TF.Merc.Engineer.defaultLoadout = { "primary": TF.Weapon.Shotgun, "secondary": null, "melee": null };
-TF.Merc.Medic.defaultLoadout = { "primary": TF.Weapon.SyringeGun, "secondary": null, "melee": null };
-TF.Merc.Sniper.defaultLoadout = { "primary": TF.Weapon.SniperRifle, "secondary": null, "melee": null };
-TF.Merc.Spy.defaultLoadout = { "primary": TF.Weapon.Revolver, "secondary": null, "melee": null };
-TF.Merc.AI.Scout.defaultLoadout = TF.Merc.Scout.defaultLoadout;
-TF.Merc.AI.Soldier.defaultLoadout = TF.Merc.Soldier.defaultLoadout;
-TF.Merc.AI.Pyro.defaultLoadout = TF.Merc.Pyro.defaultLoadout;
-TF.Merc.AI.Demoman.defaultLoadout = TF.Merc.Demoman.defaultLoadout;
-TF.Merc.AI.Heavy.defaultLoadout = TF.Merc.Heavy.defaultLoadout;
-TF.Merc.AI.Engineer.defaultLoadout = TF.Merc.Engineer.defaultLoadout;
-TF.Merc.AI.Medic.defaultLoadout = TF.Merc.Medic.defaultLoadout;
-TF.Merc.AI.Sniper.defaultLoadout = TF.Merc.Sniper.defaultLoadout;
-TF.Merc.AI.Spy.defaultLoadout = TF.Merc.Spy.defaultLoadout;
-TF.Weapon.weapons = [ TF.Weapon.Scattergun, TF.Weapon.RocketLauncher, TF.Weapon.Flamethrower, TF.Weapon.GrenadeLauncher, TF.Weapon.Minigun, TF.Weapon.Shotgun, TF.Weapon.SyringeGun, TF.Weapon.SniperRifle, TF.Weapon.Revolver, TF.Weapon.Shovel ];
 
 let l = new TF.Loadout(TF.Merc.Soldier);
 l.menu();
