@@ -1,7 +1,7 @@
 # tf-web
 Team Fortress 2 HTML port.
 
-# tf-web version 0.1.6 pre-alpha
+# tf-web version 0.1.7 pre-alpha
 
 This recreation of Team Fortress 2 is a loyal port to HTML using the Babylon.js engine.
 
@@ -22,6 +22,7 @@ tf-web-early - TF web early access build. - <a href="" download>download</a>
 
 # Annoucements
 [v0.1.6+] If you haven't upgraded to the newest version, upgrade now! "kit" is now deprecated and replaced with "loadout". The AI has been further updated. The AI patch for 0.1.7 should be released in the coming weeks to play a basic game against an AI.
+[v0.1.7+] The AI update has been postponed past 0.1.7. An annoucment will be made in the future resolving when it will be released.
 
 # Packages
 [in development] RTD - The classic RTD plugin. - <a href="" download>download</a><br>
