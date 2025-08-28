@@ -6,16 +6,16 @@ Mann vs Machine (AI) => Use a 6-player team of AI controlled mercs (1 AI for cer
 Mann vs Machine (Online) => Use an online build of MvM, 6-player team (unlimited per team).
 */
 
-// window.addEventListener(
-//     "error",
-//     (e) => alert(`${e.message}, ${e.lineno}`)
-// );
+window.addEventListener(
+    "error",
+    (e) => alert(`${e.message}, ${e.lineno}`)
+);
 
 class TF {}
 
 TF.Merc = class {
     static BotNames = ["Bot"];
-    static MercClasses = [TF.Merc.Scout, TF.Merc.Soldier, TF.Merc.Pyro, TF.Merc.Demoman, TF.Merc.Heavy, TF.Merc.Engineer, TF.Merc.Medic, TF.Merc.Sniper, TF.Merc.Spy];
+    static MercClasses;
 
     constructor(s) {
         this.name = s.name;
@@ -68,11 +68,7 @@ TF.Merc = class {
     // }
 }
 TF.Merc.Scout = class extends TF.Merc {
-    static defaultLoadout = {
-        "primary": TF.Weapon.Scattergun,
-        "secondary": null,
-        "melee": null
-    };
+    static defaultLoadout;
     constructor(s) {
         super({
             "name": "Scout",
@@ -87,11 +83,7 @@ TF.Merc.Scout = class extends TF.Merc {
     }
 }
 TF.Merc.Soldier = class extends TF.Merc {
-    static defaultLoadout = {
-        "primary": TF.Weapon.RocketLauncher,
-        "secondary": TF.Weapon.Shotgun,
-        "melee": TF.Weapon.Shovel
-    };
+    static defaultLoadout;
     constructor(s) {
         super({
             "name": "Soldier",
@@ -106,11 +98,7 @@ TF.Merc.Soldier = class extends TF.Merc {
     }
 }
 TF.Merc.Pyro = class extends TF.Merc {
-    static defaultLoadout = {
-        "primary": TF.Weapon.Flamethrower,
-        "secondary": TF.Weapon.Shotgun,
-        "melee": null
-    };
+    static defaultLoadout;
     constructor(s) {
         super({
             "name": "Pyro",
@@ -125,11 +113,7 @@ TF.Merc.Pyro = class extends TF.Merc {
     }
 }
 TF.Merc.Demoman = class extends TF.Merc {
-    static defaultLoadout = {
-        "primary": TF.Weapon.GrenadeLauncher,
-        "secondary": null,
-        "melee": null
-    };
+    static defaultLoadout;
     constructor(s) {
         super({
             "name": "Demoman",
@@ -144,11 +128,7 @@ TF.Merc.Demoman = class extends TF.Merc {
     }
 }
 TF.Merc.Heavy = class extends TF.Merc {
-    static defaultLoadout = {
-        "primary": TF.Weapon.Minigun,
-        "secondary": TF.Weapon.Shotgun,
-        "melee": null
-    };
+    static defaultLoadout;
     constructor(s) {
         super({
             "name": "Heavy",
@@ -163,11 +143,7 @@ TF.Merc.Heavy = class extends TF.Merc {
     }
 }
 TF.Merc.Engineer = class extends TF.Merc {
-    static defaultLoadout = {
-        "primary": TF.Weapon.Shotgun,
-        "secondary": null,
-        "melee": null
-    };
+    static defaultLoadout;
     constructor(s) {
         super({
             "name": "",
@@ -182,11 +158,7 @@ TF.Merc.Engineer = class extends TF.Merc {
     }
 }
 TF.Merc.Medic = class extends TF.Merc {
-    static defaultLoadout = {
-        "primary": TF.Weapon.SyringeGun,
-        "secondary": null,
-        "melee": null
-    };
+    static defaultLoadout;
     constructor(s) {
         super({
             "name": "",
@@ -201,11 +173,7 @@ TF.Merc.Medic = class extends TF.Merc {
     }
 }
 TF.Merc.Sniper = class extends TF.Merc {
-    static defaultLoadout = {
-        "primary": TF.Weapon.SniperRifle,
-        "secondary": null,
-        "melee": null
-    };
+    static defaultLoadout;
     constructor(s) {
         super({
             "name": "",
@@ -220,11 +188,7 @@ TF.Merc.Sniper = class extends TF.Merc {
     }
 }
 TF.Merc.Spy = class extends TF.Merc {
-    static defaultLoadout = {
-        "primary": TF.Weapon.Revolver,
-        "secondary": null,
-        "melee": null
-    };
+    static defaultLoadout;
     constructor(s) {
         super({
             "name": "",
@@ -1318,6 +1282,20 @@ var players = [player];
 var ai = [];
 
 var keybinds = {};
+
+TF.Merc.MercClasses = [TF.Merc.Scout, TF.Merc.Soldier, TF.Merc.Pyro, TF.Merc.Demoman, TF.Merc.Heavy, TF.Merc.Engineer, TF.Merc.Medic, TF.Merc.Sniper, TF.Merc.Spy];
+TF.Merc.Scout.defaultLoadout = { "primary": TF.Weapon.Scattergun, "secondary": null, "melee": null };
+TF.Merc.Soldier.defaultLoadout = { "primary": TF.Weapon.RocketLauncher, "secondary": TF.Weapon.Shotgun, "melee": TF.Weapon.Shovel };
+TF.Merc.Pyro.defaultLoadout = { "primary": TF.Weapon.Flamethrower, "secondary": TF.Weapon.Shotgun, "melee": null };
+TF.Merc.Demoman.defaultLoadout = { "primary": TF.Weapon.GrenadeLauncher, "secondary": null, "melee": null };
+TF.Merc.Heavy.defaultLoadout = { "primary": TF.Weapon.Minigun, "secondary": TF.Weapon.Shotgun, "melee": null };
+TF.Merc.Engineer.defaultLoadout = { "primary": TF.Weapon.Shotgun, "secondary": null, "melee": null };
+TF.Merc.Medic.defaultLoadout = { "primary": TF.Weapon.SyringeGun, "secondary": null, "melee": null };
+TF.Merc.Sniper.defaultLoadout = { "primary": TF.Weapon.SniperRifle, "secondary": null, "melee": null };
+TF.Merc.Spy.defaultLoadout = { "primary": TF.Weapon.Revolver, "secondary": null, "melee": null };
+
+let l = new TF.Loadout(TF.Merc.Soldier);
+l.menu();
 
 scene.onBeforeRenderObservable.add(() => {
     players.forEach(p => {
