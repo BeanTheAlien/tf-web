@@ -24,6 +24,9 @@ TF.Merc = class {
         this.secondary = new s.loadout.secondary;
         this.melee = new s.loadout.melee;
         this.health = s.health;
+        this.maxhealth = this.health;
+        this.overhealmax = 0;
+        for(const { key, value } of Object.entries(s.misc)) this[key] = value;
         this.x = s.x;
         this.y = s.y;
         this.z = s.z;
@@ -74,11 +77,13 @@ TF.Merc.Scout = class extends TF.Merc {
             "name": "Scout",
             "mdl": null,
             "loadout": { ...TF.Merc.Scout.defaultLoadout },
+            "health": 125,
             "x": s.x,
             "y": s.y,
             "z": s.z,
             "jumpSpeed": 0.5,
-            "moveSpeed": 2
+            "moveSpeed": 2,
+            "misc": {}
         });
     }
 }
@@ -89,11 +94,13 @@ TF.Merc.Soldier = class extends TF.Merc {
             "name": "Soldier",
             "mdl": null,
             "loadout": { ...TF.Merc.Soldier.defaultLoadout },
+            "health": 200,
             "x": s.x,
             "y": s.y,
             "z": s.z,
             "jumpSpeed": 0.5,
-            "moveSpeed": 0.6
+            "moveSpeed": 0.6,
+            "misc": {}
         });
     }
 }
@@ -104,11 +111,13 @@ TF.Merc.Pyro = class extends TF.Merc {
             "name": "Pyro",
             "mdl": null,
             "loadout": { ...TF.Merc.Pyro.defaultLoadout },
+            "health": 175,
             "x": s.x,
             "y": s.y,
             "z": s.z,
             "jumpSpeed": 0.5,
-            "moveSpeed": 0.75
+            "moveSpeed": 0.75,
+            "misc": {}
         });
     }
 }
@@ -119,11 +128,15 @@ TF.Merc.Demoman = class extends TF.Merc {
             "name": "Demoman",
             "mdl": null,
             "loadout": { ...TF.Merc.Demoman.defaultLoadout },
+            "health": 175,
             "x": s.x,
             "y": s.y,
             "z": s.z,
             "jumpSpeed": 0.5,
-            "moveSpeed": 0.6
+            "moveSpeed": 0.6,
+            "misc": {
+                "deployedsbombs": 0
+            }
         });
     }
 }
@@ -134,11 +147,13 @@ TF.Merc.Heavy = class extends TF.Merc {
             "name": "Heavy",
             "mdl": null,
             "loadout": { ...TF.Merc.Heavy.defaultLoadout },
+            "health": 300,
             "x": s.x,
             "y": s.y,
             "z": s.z,
             "jumpSpeed": 0.5,
-            "moveSpeed": 0.35
+            "moveSpeed": 0.35,
+            "misc": {}
         });
     }
 }
@@ -149,11 +164,17 @@ TF.Merc.Engineer = class extends TF.Merc {
             "name": "",
             "mdl": null,
             "loadout": { ...TF.Merc.Engineer.defaultLoadout },
+            "health": 125,
             "x": s.x,
             "y": s.y,
             "z": s.z,
             "jumpSpeed": 0.5,
-            "moveSpeed": 0.75
+            "moveSpeed": 0.75,
+            "misc": {
+                "metal": 200,
+                "metalmax": 200,
+                "buildings": {}
+            }
         });
     }
 }
@@ -164,11 +185,15 @@ TF.Merc.Medic = class extends TF.Merc {
             "name": "",
             "mdl": null,
             "loadout": { ...TF.Merc.Medic.defaultLoadout },
+            "health": 150,
             "x": s.x,
             "y": s.y,
             "z": s.z,
             "jumpSpeed": 0.5,
-            "moveSpeed": 0.75
+            "moveSpeed": 0.75,
+            "misc": {
+                "übercharge": 0
+            }
         });
     }
 }
@@ -179,11 +204,13 @@ TF.Merc.Sniper = class extends TF.Merc {
             "name": "",
             "mdl": null,
             "loadout": { ...TF.Merc.Sniper.defaultLoadout },
+            "health": 125,
             "x": s.x,
             "y": s.y,
             "z": s.z,
             "jumpSpeed": 0.5,
-            "moveSpeed": 0.75
+            "moveSpeed": 0.75,
+            "misc": {}
         });
     }
 }
@@ -194,11 +221,13 @@ TF.Merc.Spy = class extends TF.Merc {
             "name": "",
             "mdl": null,
             "loadout": { ...TF.Merc.Spy.defaultLoadout },
+            "health": 125,
             "x": s.x,
             "y": s.y,
             "z": s.z,
             "jumpSpeed": 0.5,
-            "moveSpeed": 0.75
+            "moveSpeed": 0.75,
+            "misc": {}
         });
     }
 }
@@ -272,16 +301,12 @@ TF.Merc.AI = class {
     // }
 }
 TF.Merc.AI.Scout = class extends TF.Merc.AI {
-    static defaultLoadout = {
-        "primary": TF.Weapon.Scattergun,
-        "secondary": null,
-        "melee": null
-    };
     constructor(s) {
         super({
             "name": "Scout",
             "mdl": null,
             "loadout": { ...TF.Merc.Scout.defaultLoadout },
+            "health": 125,
             "x": s.x,
             "y": s.y,
             "z": s.z,
@@ -292,16 +317,12 @@ TF.Merc.AI.Scout = class extends TF.Merc.AI {
     }
 }
 TF.Merc.AI.Soldier = class extends TF.Merc.AI {
-    static defaultLoadout = {
-        "primary": TF.Weapon.RocketLauncher,
-        "secondary": TF.Weapon.Shotgun,
-        "melee": TF.Weapon.Shovel
-    };
     constructor(s) {
         super({
             "name": "Soldier",
             "mdl": null,
             "loadout": { ...TF.Merc.Soldier.defaultLoadout },
+            "health": 200,
             "x": s.x,
             "y": s.y,
             "z": s.z,
@@ -314,16 +335,12 @@ TF.Merc.AI.Soldier = class extends TF.Merc.AI {
     }
 }
 TF.Merc.AI.Pyro = class extends TF.Merc.AI {
-    static defaultLoadout = {
-        "primary": TF.Weapon.Flamethrower,
-        "secondary": TF.Weapon.Shotgun,
-        "melee": null
-    };
     constructor(s) {
         super({
             "name": "Pyro",
             "mdl": null,
             "loadout": { ...TF.Merc.Pyro.defaultLoadout },
+            "health": 175,
             "x": s.x,
             "y": s.y,
             "z": s.z,
@@ -334,16 +351,12 @@ TF.Merc.AI.Pyro = class extends TF.Merc.AI {
     }
 }
 TF.Merc.AI.Demoman = class extends TF.Merc.AI {
-    static defaultLoadout = {
-        "primary": TF.Weapon.GrenadeLauncher,
-        "secondary": null,
-        "melee": null
-    };
     constructor(s) {
         super({
             "name": "Demoman",
             "mdl": null,
             "loadout": { ...TF.Merc.Demoman.defaultLoadout },
+            "health": 175,
             "x": s.x,
             "y": s.y,
             "z": s.z,
@@ -354,16 +367,12 @@ TF.Merc.AI.Demoman = class extends TF.Merc.AI {
     }
 }
 TF.Merc.AI.Heavy = class extends TF.Merc.AI {
-    static defaultLoadout = {
-        "primary": TF.Weapon.Minigun,
-        "secondary": TF.Weapon.Shotgun,
-        "melee": null
-    };
     constructor(s) {
         super({
             "name": "Heavy",
             "mdl": null,
             "loadout": { ...TF.Merc.Heavy.defaultLoadout },
+            "health": 300,
             "x": s.x,
             "y": s.y,
             "z": s.z,
@@ -374,16 +383,12 @@ TF.Merc.AI.Heavy = class extends TF.Merc.AI {
     }
 }
 TF.Merc.AI.Engineer = class extends TF.Merc.AI {
-    static defaultLoadout = {
-        "primary": TF.Weapon.Shotgun,
-        "secondary": null,
-        "melee": null
-    };
     constructor(s) {
         super({
             "name": "",
             "mdl": null,
             "loadout": { ...TF.Merc.Engineer.defaultLoadout },
+            "health": 125,
             "x": s.x,
             "y": s.y,
             "z": s.z,
@@ -394,16 +399,12 @@ TF.Merc.AI.Engineer = class extends TF.Merc.AI {
     }
 }
 TF.Merc.AI.Medic = class extends TF.Merc.AI {
-    static defaultLoadout = {
-        "primary": TF.Weapon.SyringeGun,
-        "secondary": null,
-        "melee": null
-    };
     constructor(s) {
         super({
             "name": "",
             "mdl": null,
             "loadout": { ...TF.Merc.Medic.defaultLoadout },
+            "health": 150,
             "x": s.x,
             "y": s.y,
             "z": s.z,
@@ -414,16 +415,12 @@ TF.Merc.AI.Medic = class extends TF.Merc.AI {
     }
 }
 TF.Merc.AI.Sniper = class extends TF.Merc.AI {
-    static defaultLoadout = {
-        "primary": TF.Weapon.SniperRifle,
-        "secondary": null,
-        "melee": null
-    };
     constructor(s) {
         super({
             "name": "",
             "mdl": null,
             "loadout": { ...TF.Merc.Sniper.defaultLoadout },
+            "health": 125,
             "x": s.x,
             "y": s.y,
             "z": s.z,
@@ -434,16 +431,12 @@ TF.Merc.AI.Sniper = class extends TF.Merc.AI {
     }
 }
 TF.Merc.AI.Spy = class extends TF.Merc.AI {
-    static defaultLoadout = {
-        "primary": TF.Weapon.Revolver,
-        "secondary": null,
-        "melee": null
-    };
     constructor(s) {
         super({
             "name": "",
             "mdl": null,
             "loadout": { ...TF.Merc.Spy.defaultLoadout },
+            "health": 125,
             "x": s.x,
             "y": s.y,
             "z": s.z,
@@ -455,18 +448,7 @@ TF.Merc.AI.Spy = class extends TF.Merc.AI {
 }
 
 TF.Weapon = class {
-    static weapons = [
-        TF.Weapon.Scattergun,
-        TF.Weapon.RocketLauncher,
-        TF.Weapon.Flamethrower,
-        TF.Weapon.GrenadeLauncher,
-        TF.Weapon.Minigun,
-        TF.Weapon.Shotgun,
-        TF.Weapon.SyringeGun,
-        TF.Weapon.SniperRifle,
-        TF.Weapon.Revolver,
-        TF.Weapon.Shovel
-    ];
+    static weapons;
     constructor(s) {
         this.name = s.name;
         this.mdl = s.mdl;
@@ -476,6 +458,7 @@ TF.Weapon = class {
         this.attackfailsound = s.attackfailsound;
         this.equipby = s.equipby;
         this.invicon;
+        for(const { key, value } of Object.keys(s.misc)) this[key] = value;
     }
     atk1() {
         this.attack();
@@ -495,7 +478,8 @@ TF.Weapon.Scattergun = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.Scattergun.equipby,
-            "invicon": "missingtexture.png"
+            "invicon": "missingtexture.png",
+            "misc": {}
         });
         this.shells = 6;
         this.mag = 6;
@@ -1293,6 +1277,16 @@ TF.Merc.Engineer.defaultLoadout = { "primary": TF.Weapon.Shotgun, "secondary": n
 TF.Merc.Medic.defaultLoadout = { "primary": TF.Weapon.SyringeGun, "secondary": null, "melee": null };
 TF.Merc.Sniper.defaultLoadout = { "primary": TF.Weapon.SniperRifle, "secondary": null, "melee": null };
 TF.Merc.Spy.defaultLoadout = { "primary": TF.Weapon.Revolver, "secondary": null, "melee": null };
+TF.Merc.AI.Scout.defaultLoadout = TF.Merc.Scout.defaultLoadout;
+TF.Merc.AI.Soldier.defaultLoadout = TF.Merc.Soldier.defaultLoadout;
+TF.Merc.AI.Pyro.defaultLoadout = TF.Merc.Pyro.defaultLoadout;
+TF.Merc.AI.Demoman.defaultLoadout = TF.Merc.Demoman.defaultLoadout;
+TF.Merc.AI.Heavy.defaultLoadout = TF.Merc.Heavy.defaultLoadout;
+TF.Merc.AI.Engineer.defaultLoadout = TF.Merc.Engineer.defaultLoadout;
+TF.Merc.AI.Medic.defaultLoadout = TF.Merc.Medic.defaultLoadout;
+TF.Merc.AI.Sniper.defaultLoadout = TF.Merc.Sniper.defaultLoadout;
+TF.Merc.AI.Spy.defaultLoadout = TF.Merc.Spy.defaultLoadout;
+TF.Weapon.weapons = [ TF.Weapon.Scattergun, TF.Weapon.RocketLauncher, TF.Weapon.Flamethrower, TF.Weapon.GrenadeLauncher, TF.Weapon.Minigun, TF.Weapon.Shotgun, TF.Weapon.SyringeGun, TF.Weapon.SniperRifle, TF.Weapon.Revolver, TF.Weapon.Shovel ];
 
 let l = new TF.Loadout(TF.Merc.Soldier);
 l.menu();
