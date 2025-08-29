@@ -1087,8 +1087,8 @@ TF.Map = class {
 TF.Map.Badwater = class extends TF.Map {}
 
 TF.Loadout = class {
-    constructor(s) {
-        this.equipclass = s.equipclass;
+    constructor(c) {
+        this.equipclass = c;
     }
     menu() {
         document.removeEventListener("click", lock);
@@ -1106,12 +1106,13 @@ TF.Loadout = class {
             const makeEquipMenu = (s) => {
                 const emenu = document.createElement("div");
                 emenu.className = "ebslot";
-                const ebls = TF.Weapon.weapons.flatMap(w => w.equipby.filter(e => e.name == this.equipclass && e.slot == s)); // i think the error is here
+                const ebls = TF.Weapon.weapons.filter(w => w.equipby.some(ww => this.equipclass == ww.name && ww.slot == s));
                 ebls.forEach(e => {
+                    alert(e);
                     const img = document.createElement("img");
                     img.src = e.invicon;
                     const p = document.createElement("p");
-                    p.textContent = e.name.name;
+                    p.textContent = e.name;
                     const br = document.createElement("br");
                     emenu.appendChild(img);
                     emenu.appendChild(br);
