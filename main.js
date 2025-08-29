@@ -602,6 +602,29 @@ TF.Weapon.GrenadeLauncher = class extends TF.Weapon {
         this.ammo = 20;
     }
 }
+TF.Weapon.StickyBombLauncher = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Demoman, "slot": "secondary" }];
+    static invicon = "missingtexture.png";
+    constructor() {
+        super({
+            "name": "Sticky Bomb Launcher",
+            "mdl": null,
+            "atkdelay": 0,
+            "attack": () => {},
+            "attackalt": () => {},
+            "attackfailsound": null,
+            "equipby": TF.Weapon.StickyBombLauncher.equipby,
+            "invicon": TF.Weapon.StickyBombLauncher.invicon,
+            "misc": {
+                "stickies": 0,
+                "maxstickies": 8
+            }
+        });
+        this.shells = 8;
+        this.mag = 8;
+        this.ammo = 20;
+    }
+}
 TF.Weapon.Minigun = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Heavy, "slot": "primary" }];
     static invicon = "missingtexture.png";
@@ -716,6 +739,60 @@ TF.Weapon.Shovel = class extends TF.Weapon {
             "invicon": TF.Weapon.Shovel.invicon,
             "misc": {}
         });
+    }
+}
+TF.Weapon.Bottle = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Demoman, "slot": "melee" }];
+    static invicon = "missingtexture.png";
+    constructor() {
+        super({
+            "name": "Bottle",
+            "mdl": null,
+            "atkdelay": 0,
+            "attack": () => {},
+            "attackalt": () => {},
+            "attackfailsound": null,
+            "equipby": TF.Weapon.Bottle.equipby,
+            "invicon": TF.Weapon.Bottle.invicon,
+            "misc": {}
+        });
+    }
+}
+TF.Weapon.Bat = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Scout, "slot": "melee" }];
+    static invicon = "missingtexture.png";
+    constructor() {
+        super({
+            "name": "Bat",
+            "mdl": null,
+            "atkdelay": 0,
+            "attack": () => {},
+            "attackalt": () => {},
+            "attackfailsound": null,
+            "equipby": TF.Weapon.Bat.equipby,
+            "invicon": TF.Weapon.Bat.invicon,
+            "misc": {}
+        });
+    }
+}
+TF.Weapon.Pistol = class extends TF.Weapon {
+    static equipby = [ { "name": TF.Merc.Scout, "slot": "secondary" }, { "name": TF.Merc.Engineer, "slot": "secondary" } ];
+    static invicon = "missingtexture.png";
+    constructor() {
+        super({
+            "name": "Pistol",
+            "mdl": null,
+            "atkdelay": 0,
+            "attack": () => {},
+            "attackalt": () => {},
+            "attackfailsound": null,
+            "equipby": TF.Weapon.Pistol.equipby,
+            "invicon": TF.Weapon.Pistol.invicon,
+            "misc": {}
+        });
+        this.shells = 12;
+        this.mag = 12;
+        this.ammo = 36;
     }
 }
 
