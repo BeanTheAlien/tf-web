@@ -795,6 +795,23 @@ TF.Weapon.Pistol = class extends TF.Weapon {
         this.ammo = 36;
     }
 }
+TF.Weapon.FireAxe = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Pyro, "slot": "melee" }];
+    static invicon = "missingtexture.png";
+    constructor() {
+        super({
+            "name": "Fire Axe",
+            "mdl": null,
+            "atkdelay": 0,
+            "attack": () => {},
+            "attackalt": () => {},
+            "attackfailsound": null,
+            "equipby": TF.Weapon.FireAxe.equipby,
+            "invicon": TF.Weapon.FireAxe.invicon,
+            "misc": {}
+        });
+    }
+}
 
 TF.Env = class {
     constructor(s) {
