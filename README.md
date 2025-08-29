@@ -45,6 +45,7 @@ tf-web-early - TF web early access build. - <a href="" download>download</a>
 
 
 ## Planned Features (Descriptions)
+### Trading
 The LAN based trading or online trading system will be featured in the launch update.
 Trading will be included under TF.Trading (TF.Trading.LAN and TF.Trading.Online respectively).
 See dedicated documentation when the update is released for full information.
@@ -53,4 +54,36 @@ In terms of the trading sequence, here's what to expect:
 - A menu to put items you wish to trade
 - Live updates (see what everyone is offering)
 - Confirm trade button to commit the trade
-This will also include a purchase option where you can optionally just send real money to buy items from others.
+
+### Community Content
+Community made content can be voted to be put in every month in the vote-a-thon!
+Community made content includes everything (maps, taunts, hats, weapons, usw).
+As long as the votes to put it in is more than 75%, it will be put in.
+Rebalances and things of the such may be required for some community content and you can optionally filter games to show games with community content or games with strictly base game content.
+If the majority of the community votes for a change, removal or things of the such for a community content item, action will be taken with the respective vote result.
+Community content will have a dedicated software for development with access to the core TF web API.
+Created community content will be bundeled for easy implementation or decompiling so if the team does have to hard code it, its easier.
+We hope to automate the process, but it is not easy.
+We apologize for the wait, but we have a lot to work on, so we hope you can understand.
+
+### Accounts
+Accounts will have a connected:
+- E-Mail
+- Phone number (optional)
+Accounts will have the following data associated with them:
+- Username
+- Display name
+- Password
+- Profile icon
+- Level
+- Unlocked content (weapons, hats, usw)
+- Skill level
+- Overall kill-death ratio
+
+What do each of the connected fields in your account represent?
+- Username: your stored, unique name
+- Display name: the name to show in matches
+- Password: your account password
+- Icon: the icon to show in matches in the game info menu
+- Level: your game level
+- Unlocked content: the content you have unlocked
