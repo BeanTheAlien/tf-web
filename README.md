@@ -36,3 +36,9 @@ tf-web-early - TF web early access build. - <a href="" download>download</a>
 [in development] Saxton Hale - The classic Versus Saxton Hale plugin. - <a href="" download>download</a><br>
 [in development] Survival - A custom Mann vs Machine inspired infinite wave survival experience. - <a href="" download>download</a><br>
 [in development] Left 4 Fortress - Various Left 4 Dead levels - now played as Team Fortress 2 mercs. - <a href="" download>download</a><br>
+
+# Planned Features
+- LAN based trading or online trading system
+- Community made content support (without the team having to hard code it)
+- Being able to make accounts
+- Dedicated website (community hub, account hub, usw)
