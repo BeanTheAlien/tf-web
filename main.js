@@ -469,6 +469,7 @@ TF.Weapon = class {
 }
 TF.Weapon.Scattergun = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Scout, "slot": "primary" }];
+    static invicon = "missingtexture.png";
     constructor() {
         super({
             "name": "Scattergun",
@@ -478,7 +479,7 @@ TF.Weapon.Scattergun = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.Scattergun.equipby,
-            "invicon": "missingtexture.png",
+            "invicon": TF.Weapon.Scattergun.invicon,
             "misc": {}
         });
         this.shells = 6;
@@ -488,6 +489,7 @@ TF.Weapon.Scattergun = class extends TF.Weapon {
 }
 TF.Weapon.RocketLauncher = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Soldier, "slot": "primary" }];
+    static invicon = "missingtexture.png";
     constructor() {
         super({
             "name": "Rocket Launcher",
@@ -520,7 +522,7 @@ TF.Weapon.RocketLauncher = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.RocketLauncher.equipby,
-            "invicon": "missingtexture.png",
+            "invicon": TF.Weapon.RocketLauncher.invicon,
             "misc": {}
         });
         this.shells = 4;
@@ -530,6 +532,7 @@ TF.Weapon.RocketLauncher = class extends TF.Weapon {
 }
 TF.Weapon.Flamethrower = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Pyro, "slot": "primary" }];
+    static invicon = "missingtexture.png";
     constructor() {
         super({
             "name": "Flamethrower",
@@ -569,7 +572,7 @@ TF.Weapon.Flamethrower = class extends TF.Weapon {
             },
             "attackfailsound": null,
             "equipby": TF.Weapon.Flamethrower.equipby,
-            "invicon": "missingtexture.png",
+            "invicon": TF.Weapon.Flamethrower.invicon,
             "misc": {}
         });
         this.ammo = 200;
@@ -577,6 +580,7 @@ TF.Weapon.Flamethrower = class extends TF.Weapon {
 }
 TF.Weapon.GrenadeLauncher = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Demoman, "slot": "primary" }];
+    static invicon = "missingtexture.png";
     constructor() {
         super({
             "name": "Grenade Launcher",
@@ -586,7 +590,7 @@ TF.Weapon.GrenadeLauncher = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.GrenadeLauncher.equipby,
-            "invicon": "missingtexture.png",
+            "invicon": TF.Weapon.GrenadeLauncher.invicon,
             "misc": {}
         });
         this.shells = 6;
@@ -596,6 +600,7 @@ TF.Weapon.GrenadeLauncher = class extends TF.Weapon {
 }
 TF.Weapon.Minigun = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Heavy, "slot": "primary" }];
+    static invicon = "missingtexture.png";
     constructor() {
         super({
             "name": "Minigun",
@@ -605,7 +610,7 @@ TF.Weapon.Minigun = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.Minigun.equipby,
-            "invicon": "missingtexture.png",
+            "invicon": TF.Weapon.Minigun.invicon,
             "misc": {}
         });
         this.ammo = 200;
@@ -613,6 +618,7 @@ TF.Weapon.Minigun = class extends TF.Weapon {
 }
 TF.Weapon.Shotgun = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Engineer, "slot": "primary" }, { "name": TF.Merc.Soldier, "slot": "secondary" }, { "name": TF.Merc.Pyro, "slot": "secondary" }, { "name": TF.Merc.Heavy, "slot": "secondary" }];
+    static invicon = "missingtexture.png";
     constructor() {
         super({
             "name": "Shotgun",
@@ -622,7 +628,7 @@ TF.Weapon.Shotgun = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.Shotgun.equipby,
-            "invicon": "missingtexture.png",
+            "invicon": TF.Weapon.Shotgun.invicon,
             "misc": {}
         });
         this.shells = 6;
@@ -632,6 +638,7 @@ TF.Weapon.Shotgun = class extends TF.Weapon {
 }
 TF.Weapon.SyringeGun = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Medic, "slot": "primary" }];
+    static invicon = "missingtexture.png";
     constructor() {
         super({
             "name": "Syringe Gun",
@@ -641,7 +648,7 @@ TF.Weapon.SyringeGun = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.SyringeGun.equipby,
-            "invicon": "missingtexture.png",
+            "invicon": TF.Weapon.SyringeGun.invicon,
             "misc": {}
         });
         this.shells = 40;
@@ -651,6 +658,7 @@ TF.Weapon.SyringeGun = class extends TF.Weapon {
 }
 TF.Weapon.SniperRifle = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Sniper, "slot": "primary" }];
+    static invicon = "missingtexture.png";
     constructor() {
         super({
             "name": "Sniper Rifle",
@@ -660,7 +668,7 @@ TF.Weapon.SniperRifle = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.SniperRifle.equipby,
-            "invicon": "missingtexture.png",
+            "invicon": TF.Weapon.SniperRifle.invicon,
             "misc": {
                 "charge": 0,
                 "maxcharge": 10
@@ -671,6 +679,7 @@ TF.Weapon.SniperRifle = class extends TF.Weapon {
 }
 TF.Weapon.Revolver = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Spy, "slot": "primary" }];
+    static invicon = "missingtexture.png";
     constructor() {
         super({
             "name": "Revolver",
@@ -680,7 +689,7 @@ TF.Weapon.Revolver = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.Revolver.equipby,
-            "invicon": "missingtexture.png",
+            "invicon": TF.Weapon.Revolver.invicon,
             "misc": {}
         });
         this.shells = 6;
@@ -690,6 +699,7 @@ TF.Weapon.Revolver = class extends TF.Weapon {
 }
 TF.Weapon.Shovel = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Soldier, "slot": "melee" }];
+    static invicon = "missingtexture.png";
     constructor() {
         super({
             "name": "Shovel",
@@ -699,7 +709,7 @@ TF.Weapon.Shovel = class extends TF.Weapon {
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.Shovel.equipby,
-            "invicon": "missingtexture.png",
+            "invicon": TF.Weapon.Shovel.invicon,
             "misc": {}
         });
     }
