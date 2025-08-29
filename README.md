@@ -87,3 +87,5 @@ What do each of the connected fields in your account represent?
 - Icon: the icon to show in matches in the game info menu
 - Level: your game level
 - Unlocked content: the content you have unlocked
+- Skill level: based on your global kill-death ratio, this represents what level you play at (used for team balancing)
+- Overall kill-death ratio: represents the total number of kills to deaths in all your games
