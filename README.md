@@ -42,3 +42,15 @@ tf-web-early - TF web early access build. - <a href="" download>download</a>
 - Community made content support (without the team having to hard code it)
 - Being able to make accounts
 - Dedicated website (community hub, account hub, usw)
+
+
+## Planned Features (Descriptions)
+The LAN based trading or online trading system will be featured in the launch update.
+Trading will be included under TF.Trading (TF.Trading.LAN and TF.Trading.Online respectively).
+See dedicated documentation when the update is released for full information.
+In terms of the trading sequence, here's what to expect:
+- Two accounts
+- A menu to put items you wish to trade
+- Live updates (see what everyone is offering)
+- Confirm trade button to commit the trade
+This will also include a purchase option where you can optionally just send real money to buy items from others.
