@@ -457,8 +457,12 @@ TF.Weapon = class {
         this.attackalt = s.attackalt;
         this.attackfailsound = s.attackfailsound;
         this.equipby = s.equipby;
-        this.invicon;
+        this.invicon = s.invicon;
         for(const { key, value } of Object.keys(s.misc)) this[key] = value;
+        /*
+        grade (unique, strange, usw)
+        comps (strangetracker, usw)
+        */
     }
     atk1() {
         this.attack();
@@ -1118,15 +1122,23 @@ TF.Loadout = class {
                 emenu.className = "ebslot";
                 const ebls = TF.Weapon.weapons.filter(w => w.equipby.some(ww => this.equipclass == ww.name && ww.slot == s));
                 ebls.forEach(e => {
-                    alert(e);
+                    const div = document.createElement("div");
                     const img = document.createElement("img");
                     img.src = e.invicon;
                     const p = document.createElement("p");
                     p.textContent = e.name;
                     const br = document.createElement("br");
-                    emenu.appendChild(img);
-                    emenu.appendChild(br);
-                    emenu.appendChild(p);
+                    div.appendChild(img);
+                    div.appendChild(br);
+                    div.appendChild(p);
+                    emenu.appendChild(div);
+                    Object.assign(img.style, {
+                        width: "30%",
+                        height: "30%"
+                    });
+                    Object.assign(p.style, {
+                        fontSize: "12px"
+                    });
                 });
                 Object.assign(emenu.style, {
                     position: "fixed",
