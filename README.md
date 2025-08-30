@@ -89,3 +89,15 @@ What do each of the connected fields in your account represent?
 - Unlocked content: the content you have unlocked
 - Skill level: based on your global kill-death ratio, this represents what level you play at (used for team balancing)
 - Overall kill-death ratio: represents the total number of kills to deaths in all your games
+
+### Website
+The planned sections include:
+- Home
+- Account page
+- Play online
+- Play with bots
+- Merch store
+- Community hub
+- Donations page
+- Privacy, EULA, usw
+And more (team is discussing this still 😓)
