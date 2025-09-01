@@ -78,7 +78,8 @@ Accounts will have the following data associated with them:
 - Level
 - Unlocked content (weapons, hats, usw)
 - Skill level
-- Overall kill-death ratio
+- Overall kill-death ratio (KDR)
+- Accuracy
 
 What do each of the connected fields in your account represent?
 - Username: your stored, unique name
@@ -87,8 +88,17 @@ What do each of the connected fields in your account represent?
 - Icon: the icon to show in matches in the game info menu
 - Level: your game level
 - Unlocked content: the content you have unlocked
-- Skill level: based on your global kill-death ratio, this represents what level you play at (used for team balancing)
-- Overall kill-death ratio: represents the total number of kills to deaths in all your games
+- Skill level: based on various factors for each class (used for team balancing)
+- Overall KDR: represents the total number of kills to deaths in all your games
+- Accuracy: represents the total number of shots hit to the number of shots taken in all of your games
+
+What factors determine my skill level for each class?
+Scout
+- Overall KDR
+- Accuracy
+Soldier
+- Overall KDR
+- Accuracy
 
 ### Website
 The planned sections include:
