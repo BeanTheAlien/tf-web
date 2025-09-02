@@ -1369,6 +1369,10 @@ TF.Loadout = class {
                     Object.assign(p.style, {
                         fontSize: "12px"
                     });
+                    Object.assign(div.style, {
+                        backgroundColor: "#525252",
+                        borderRadius: "5px"
+                    });
                 });
                 Object.assign(emenu.style, {
                     position: "fixed",
