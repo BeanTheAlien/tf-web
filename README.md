@@ -110,4 +110,4 @@ The planned sections include:
 - Community hub
 - Donations page
 - Privacy, EULA, usw
-<br>And more (team is discussing this still 😓)
+<br><br>And more (team is discussing this still 😓)
