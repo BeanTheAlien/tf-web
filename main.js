@@ -888,7 +888,7 @@ TF.Weapon.Knife = class extends TF.Weapon {
             "name": "Knife",
             "mdl": null,
             "atkdelay": 0,
-            "attack": () => {}, // if hit enemy, get enemy facing direction
+            "attack": () => {}, // if hit enemy, get enemy facing direction, if in range(---) => kill, else => dmg
             "attackalt": () => {},
             "attackfailsound": null,
             "equipby": TF.Weapon.Knife.equipby,
@@ -1264,10 +1264,10 @@ TF.AI.Vision = class extends TF.AI {
 }
 TF.AI.Hearing = class extends TF.AI {}
 
-TF.Server = class {
-    constructor() {}
-    changeMap(ref) {}
-}
+// TF.Server = class {
+//     constructor() {}
+//     changeMap(ref) {}
+// }
 
 TF.Map = class {
     constructor(s) {
@@ -1383,6 +1383,14 @@ TF.Console = class {
         this.state = s.state;
     }
 }
+
+// TF.Server = class {
+//     constructor(s) {
+//         this.name = s.name;
+//         this.address = s.address;
+//         this.location = s.location;
+//     }
+// }
 
 class RaycastEmitter {
     constructor(s) {
