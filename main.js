@@ -897,6 +897,23 @@ TF.Weapon.Knife = class extends TF.Weapon {
         });
     }
 }
+TF.Weapon.Medigun = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Medic, "slot": "secondary" }];
+    static invicon = "missingtexture.png";
+    constructor() {
+        super({
+            "name": "Knife",
+            "mdl": null,
+            "atkdelay": 0,
+            "attack": () => {},
+            "attackalt": () => {},
+            "attackfailsound": null,
+            "equipby": TF.Weapon.Knife.equipby,
+            "invicon": TF.Weapon.Knife.invicon,
+            "misc": {}
+        });
+    }
+}
 
 TF.Env = class {
     constructor(s) {
