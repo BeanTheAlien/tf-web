@@ -1397,7 +1397,7 @@ TF.Loadout = class {
                 "slot-secondary": () => makeEquipMenu("secondary"),
                 "slot-melee": () => makeEquipMenu("melee")
             };
-            (execs[id])();
+            execs[id]();
         }
         slotprimary.innerHTML = player.primary.name;
         slotsecondary.innerHTML = player.secondary.name;
@@ -1680,7 +1680,6 @@ engine.runRenderLoop(game);
 
 // Resize Handler
 window.addEventListener("resize", () => engine.resize());
-
 
 let l = new TF.Loadout(TF.Merc.Soldier);
 l.menu();
