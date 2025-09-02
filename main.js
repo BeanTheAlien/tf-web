@@ -812,6 +812,91 @@ TF.Weapon.FireAxe = class extends TF.Weapon {
         });
     }
 }
+TF.Weapon.Fists = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Heavy, "slot": "melee" }];
+    static invicon = "missingtexture.png";
+    constructor() {
+        super({
+            "name": "Fists",
+            "mdl": null,
+            "atkdelay": 0,
+            "attack": () => {},
+            "attackalt": () => {},
+            "attackfailsound": null,
+            "equipby": TF.Weapon.Fists.equipby,
+            "invicon": TF.Weapon.Fists.invicon,
+            "misc": {}
+        });
+    }
+}
+TF.Weapon.Wrench = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Engineer, "slot": "melee" }];
+    static invicon = "missingtexture.png";
+    constructor() {
+        super({
+            "name": "Wrench",
+            "mdl": null,
+            "atkdelay": 0,
+            "attack": () => {}, // if building hit needed
+            "attackalt": () => {},
+            "attackfailsound": null,
+            "equipby": TF.Weapon.Wrench.equipby,
+            "invicon": TF.Weapon.Wrench.invicon,
+            "misc": {}
+        });
+    }
+}
+TF.Weapon.Bonesaw = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Medic, "slot": "melee" }];
+    static invicon = "missingtexture.png";
+    constructor() {
+        super({
+            "name": "Bonesaw",
+            "mdl": null,
+            "atkdelay": 0,
+            "attack": () => {},
+            "attackalt": () => {},
+            "attackfailsound": null,
+            "equipby": TF.Weapon.Bonesaw.equipby,
+            "invicon": TF.Weapon.Bonesaw.invicon,
+            "misc": {}
+        });
+    }
+}
+TF.Weapon.Kukri = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Sniper, "slot": "melee" }];
+    static invicon = "missingtexture.png";
+    constructor() {
+        super({
+            "name": "Kukri",
+            "mdl": null,
+            "atkdelay": 0,
+            "attack": () => {},
+            "attackalt": () => {},
+            "attackfailsound": null,
+            "equipby": TF.Weapon.Kukri.equipby,
+            "invicon": TF.Weapon.Kukri.invicon,
+            "misc": {}
+        });
+    }
+}
+TF.Weapon.Knife = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Spy, "slot": "melee" }];
+    static invicon = "missingtexture.png";
+    constructor() {
+        super({
+            "name": "Knife",
+            "mdl": null,
+            "atkdelay": 0,
+            "attack": () => {}, // if hit enemy, get enemy facing direction
+            "attackalt": () => {},
+            "attackfailsound": null,
+            "equipby": TF.Weapon.Knife.equipby,
+            "invicon": TF.Weapon.Knife.invicon,
+            "misc": {}
+        });
+    }
+}
 
 TF.Env = class {
     constructor(s) {
