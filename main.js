@@ -902,14 +902,48 @@ TF.Weapon.Medigun = class extends TF.Weapon {
     static invicon = "missingtexture.png";
     constructor() {
         super({
-            "name": "Knife",
+            "name": "Medigun",
             "mdl": null,
             "atkdelay": 0,
             "attack": () => {},
             "attackalt": () => {},
             "attackfailsound": null,
-            "equipby": TF.Weapon.Knife.equipby,
-            "invicon": TF.Weapon.Knife.invicon,
+            "equipby": TF.Weapon.Medigun.equipby,
+            "invicon": TF.Weapon.Medigun.invicon,
+            "misc": {}
+        });
+    }
+}
+TF.Weapon.SubmachineGun = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Sniper, "slot": "secondary" }];
+    static invicon = "missingtexture.png";
+    constructor() {
+        super({
+            "name": "Submachine Gun",
+            "mdl": null,
+            "atkdelay": 0,
+            "attack": () => {},
+            "attackalt": () => {},
+            "attackfailsound": null,
+            "equipby": TF.Weapon.SubmachineGun.equipby,
+            "invicon": TF.Weapon.SubmachineGun.invicon,
+            "misc": {}
+        });
+    }
+}
+TF.Weapon.Sapper = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Spy, "slot": "secondary" }];
+    static invicon = "missingtexture.png";
+    constructor() {
+        super({
+            "name": "Sapper",
+            "mdl": null,
+            "atkdelay": 0,
+            "attack": () => {}, // cast forward => is engineer building?
+            "attackalt": () => {},
+            "attackfailsound": null,
+            "equipby": TF.Weapon.Sapper.equipby,
+            "invicon": TF.Weapon.Sapper.invicon,
             "misc": {}
         });
     }
