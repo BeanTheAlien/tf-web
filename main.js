@@ -948,6 +948,74 @@ TF.Weapon.Sapper = class extends TF.Weapon {
         });
     }
 }
+TF.Weapon.ConstructionPDA = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Engineer, "slot": "slot4" }];
+    static invicon = "missingtexture.png";
+    constructor() {
+        super({
+            "name": "Construction PDA",
+            "mdl": null,
+            "atkdelay": 0,
+            "attack": () => {},
+            "attackalt": () => {},
+            "attackfailsound": null,
+            "equipby": TF.Weapon.ConstructionPDA.equipby,
+            "invicon": TF.Weapon.ConstructionPDA.invicon,
+            "misc": {}
+        });
+    }
+}
+TF.Weapon.DestructionPDA = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Engineer, "slot": "slot5" }];
+    static invicon = "missingtexture.png";
+    constructor() {
+        super({
+            "name": "Deconstruction PDA",
+            "mdl": null,
+            "atkdelay": 0,
+            "attack": () => {},
+            "attackalt": () => {},
+            "attackfailsound": null,
+            "equipby": TF.Weapon.DestructionPDA.equipby,
+            "invicon": TF.Weapon.DestructionPDA.invicon,
+            "misc": {}
+        });
+    }
+}
+TF.Weapon.DisguiseKit = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Spy, "slot": "slot4" }];
+    static invicon = "missingtexture.png";
+    constructor() {
+        super({
+            "name": "Disguise Kit",
+            "mdl": null,
+            "atkdelay": 0,
+            "attack": () => {},
+            "attackalt": () => {},
+            "attackfailsound": null,
+            "equipby": TF.Weapon.DisguiseKit.equipby,
+            "invicon": TF.Weapon.DisguiseKit.invicon,
+            "misc": {}
+        });
+    }
+}
+TF.Weapon.InvisWatch = class extends TF.Weapon {
+    static equipby = [{ "name": TF.Merc.Spy, "slot": "slot4" }];
+    static invicon = "missingtexture.png";
+    constructor() {
+        super({
+            "name": "Invis Watch",
+            "mdl": null,
+            "atkdelay": 0,
+            "attack": () => {},
+            "attackalt": () => {},
+            "attackfailsound": null,
+            "equipby": TF.Weapon.InvisWatch.equipby,
+            "invicon": TF.Weapon.InvisWatch.invicon,
+            "misc": {}
+        });
+    }
+}
 
 TF.Env = class {
     constructor(s) {
