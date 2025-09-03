@@ -1659,7 +1659,7 @@ TF.Merc.AI.Engineer.defaultLoadout = TF.Merc.Engineer.defaultLoadout;
 TF.Merc.AI.Medic.defaultLoadout = TF.Merc.Medic.defaultLoadout;
 TF.Merc.AI.Sniper.defaultLoadout = TF.Merc.Sniper.defaultLoadout;
 TF.Merc.AI.Spy.defaultLoadout = TF.Merc.Spy.defaultLoadout;
-TF.Weapon.weapons = [ TF.Weapon.Scattergun, TF.Weapon.RocketLauncher, TF.Weapon.Flamethrower, TF.Weapon.GrenadeLauncher, TF.Weapon.Minigun, TF.Weapon.Shotgun, TF.Weapon.SyringeGun, TF.Weapon.SniperRifle, TF.Weapon.Revolver, TF.Weapon.Shovel ];
+TF.Weapon.weapons = [ TF.Weapon.Scattergun, TF.Weapon.RocketLauncher, TF.Weapon.Flamethrower, TF.Weapon.GrenadeLauncher, TF.Weapon.Minigun, TF.Weapon.Shotgun, TF.Weapon.SyringeGun, TF.Weapon.SniperRifle, TF.Weapon.Revolver, TF.Weapon.Shovel, TF.Weapon.Bat, TF.Weapon.Bottle, TF.Weapon.Fists, TF.Weapon.Kukri, TF.Weapon.Bonesaw, TF.Weapon.Knife, TF.Weapon.ConstructionPDA, TF.Weapon.DestructionPDA, TF.Weapon.InvisWatch, TF.Weapon.Sapper, TF.Weapon.StickyBombLauncher, TF.Weapon.FireAxe, TF.Weapon.Medigun, TF.Weapon.Pistol ];
 
 const canvas = document.getElementById("gameCanvas");
 
