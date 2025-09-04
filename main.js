@@ -476,6 +476,7 @@ TF.Weapon.Scattergun = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Scout, "slot": "primary" }];
     static invicon = "missingtexture.png";
     static name = "Scattergun";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.Scattergun.name,
@@ -498,6 +499,7 @@ TF.Weapon.RocketLauncher = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Soldier, "slot": "primary" }];
     static invicon = "missingtexture.png";
     static name = "Rocket Launcher";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.RocketLauncher.name,
@@ -543,6 +545,7 @@ TF.Weapon.Flamethrower = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Pyro, "slot": "primary" }];
     static invicon = "missingtexture.png";
     static name = "Flamethrower";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.Flamethrower.name,
@@ -593,6 +596,7 @@ TF.Weapon.GrenadeLauncher = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Demoman, "slot": "primary" }];
     static invicon = "missingtexture.png";
     static name = "Grenade Launcher";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.GrenadeLauncher.name,
@@ -615,6 +619,7 @@ TF.Weapon.StickyBombLauncher = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Demoman, "slot": "secondary" }];
     static invicon = "missingtexture.png";
     static name = "Sticky Bomb Launcher";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.StickyBombLauncher.name,
@@ -640,6 +645,7 @@ TF.Weapon.Minigun = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Heavy, "slot": "primary" }];
     static invicon = "missingtexture.png";
     static name = "Minigun";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.Minigun.name,
@@ -660,6 +666,7 @@ TF.Weapon.Shotgun = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Engineer, "slot": "primary" }, { "name": TF.Merc.Soldier, "slot": "secondary" }, { "name": TF.Merc.Pyro, "slot": "secondary" }, { "name": TF.Merc.Heavy, "slot": "secondary" }];
     static invicon = "missingtexture.png";
     static name = "Shotgun";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.Shotgun.name,
@@ -682,6 +689,7 @@ TF.Weapon.SyringeGun = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Medic, "slot": "primary" }];
     static invicon = "missingtexture.png";
     static name = "Syringe Gun";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.SyringeGun.name,
@@ -704,6 +712,7 @@ TF.Weapon.SniperRifle = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Sniper, "slot": "primary" }];
     static invicon = "missingtexture.png";
     static name = "Sniper Rifle";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.SniperRifle.name,
@@ -727,6 +736,7 @@ TF.Weapon.Revolver = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Spy, "slot": "primary" }];
     static invicon = "missingtexture.png";
     static name = "Revolver";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.Revolver.name,
@@ -749,6 +759,7 @@ TF.Weapon.Shovel = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Soldier, "slot": "melee" }];
     static invicon = "missingtexture.png";
     static name = "Shovel";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.Shovel.name,
@@ -768,6 +779,7 @@ TF.Weapon.Bottle = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Demoman, "slot": "melee" }];
     static invicon = "missingtexture.png";
     static name = "Bottle";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.Bottle.name,
@@ -787,6 +799,7 @@ TF.Weapon.Bat = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Scout, "slot": "melee" }];
     static invicon = "missingtexture.png";
     static name = "Bat";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.Bat.name,
@@ -806,6 +819,7 @@ TF.Weapon.Pistol = class extends TF.Weapon {
     static equipby = [ { "name": TF.Merc.Scout, "slot": "secondary" }, { "name": TF.Merc.Engineer, "slot": "secondary" } ];
     static invicon = "missingtexture.png";
     static name = "Pistol";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.Pistol.name,
@@ -828,6 +842,7 @@ TF.Weapon.FireAxe = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Pyro, "slot": "melee" }];
     static invicon = "missingtexture.png";
     static name = "Fire Axe";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.FireAxe.name,
@@ -847,6 +862,7 @@ TF.Weapon.Fists = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Heavy, "slot": "melee" }];
     static invicon = "missingtexture.png";
     static name = "Fists";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.Fists.name,
@@ -866,6 +882,7 @@ TF.Weapon.Wrench = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Engineer, "slot": "melee" }];
     static invicon = "missingtexture.png";
     static name = "Wrench";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.Wrench.name,
@@ -885,6 +902,7 @@ TF.Weapon.Bonesaw = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Medic, "slot": "melee" }];
     static invicon = "missingtexture.png";
     static name = "Bonesaw";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.Bonesaw.name,
@@ -904,6 +922,7 @@ TF.Weapon.Kukri = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Sniper, "slot": "melee" }];
     static invicon = "missingtexture.png";
     static name = "Kukri";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.Kukri.name,
@@ -923,6 +942,7 @@ TF.Weapon.Knife = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Spy, "slot": "melee" }];
     static invicon = "missingtexture.png";
     static name = "Knife";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.Knife.name,
@@ -942,6 +962,7 @@ TF.Weapon.Medigun = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Medic, "slot": "secondary" }];
     static invicon = "missingtexture.png";
     static name = "Medigun";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.Medigun.name,
@@ -961,6 +982,7 @@ TF.Weapon.SubmachineGun = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Sniper, "slot": "secondary" }];
     static invicon = "missingtexture.png";
     static name = "Submachine Gun";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.SubmachineGun.name,
@@ -980,6 +1002,7 @@ TF.Weapon.Sapper = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Spy, "slot": "secondary" }];
     static invicon = "missingtexture.png";
     static name = "Sapper";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.Sapper.name,
@@ -999,6 +1022,7 @@ TF.Weapon.ConstructionPDA = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Engineer, "slot": "slot4" }];
     static invicon = "missingtexture.png";
     static name = "Construction PDA";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.ConstructionPDA.name,
@@ -1018,6 +1042,7 @@ TF.Weapon.DestructionPDA = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Engineer, "slot": "slot5" }];
     static invicon = "missingtexture.png";
     static name = "Destruction PDA";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.DestructionPDA.name,
@@ -1037,6 +1062,7 @@ TF.Weapon.DisguiseKit = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Spy, "slot": "slot4" }];
     static invicon = "missingtexture.png";
     static name = "Disguise Kit";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.DisguiseKit.name,
@@ -1056,6 +1082,7 @@ TF.Weapon.InvisWatch = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Spy, "slot": "slot4" }];
     static invicon = "missingtexture.png";
     static name = "Invis Watch";
+    static stats = "";
     constructor() {
         super({
             "name": TF.Weapon.InvisWatch.name,
@@ -1481,9 +1508,12 @@ TF.Loadout = class {
                     const p = document.createElement("p");
                     p.textContent = e.name;
                     const br = document.createElement("br");
+                    const p2 = document.createElement("p");
+                    p2.textContent = e.stats;
                     div.appendChild(img);
                     div.appendChild(br);
                     div.appendChild(p);
+                    div.appendChild(p2);
                     emenu.appendChild(div);
                     Object.assign(img.style, {
                         width: "40%",
@@ -1491,6 +1521,9 @@ TF.Loadout = class {
                         padding: "15px"
                     });
                     Object.assign(p.style, {
+                        fontSize: "12px"
+                    });
+                    Object.assign(p2.style, {
                         fontSize: "12px"
                     });
                     Object.assign(div.style, {
