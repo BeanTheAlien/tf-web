@@ -541,6 +541,11 @@ TF.Weapon.RocketLauncher = class extends TF.Weapon {
         this.ammo = 20;
     }
 }
+TF.Weapon.Something = class extends TF.Weapon {
+    static equipby = [{"name": TF.Merc.Soldier, "slot": "primary"}];
+    static invicon = "missingtexture.png";
+    static name = "SOMETHING";
+}
 TF.Weapon.Flamethrower = class extends TF.Weapon {
     static equipby = [{ "name": TF.Merc.Pyro, "slot": "primary" }];
     static invicon = "missingtexture.png";
@@ -1498,6 +1503,10 @@ TF.Loadout = class {
         [slotprimary, document.createElement("br"), slotsecondary, document.createElement("br"), slotmelee].forEach(e => slots.appendChild(e));
         const equip = (e) => {
             const makeEquipMenu = (s) => {
+                const select = (e) => {
+                    const weapon = e.currentTarget.dataset.weapon;
+                    document.body.removeChild(emenu);
+                }
                 const emenu = document.createElement("div");
                 emenu.className = "ebslot";
                 const ebls = TF.Weapon.weapons.filter(w => w.equipby.some(ww => this.equipclass == ww.name && ww.slot == s));
@@ -1514,6 +1523,7 @@ TF.Loadout = class {
                     div.appendChild(br);
                     div.appendChild(p);
                     div.appendChild(p2);
+                    div.dataset.weapon = e;
                     emenu.appendChild(div);
                     Object.assign(img.style, {
                         width: "40%",
@@ -1532,6 +1542,7 @@ TF.Loadout = class {
                         width: "15%",
                         height: "30%"
                     });
+                    div.addEventListener("click", select);
                 });
                 Object.assign(emenu.style, {
                     position: "fixed",
@@ -1544,9 +1555,9 @@ TF.Loadout = class {
                     width: "100vw",
                     height: "100vh",
                     display: "flex",
-                    flexDirection: "column",
                     alignItems: "center",
-                    justifyContent: "center"
+                    justifyContent: "center",
+                    gap: "25px"
                 });
                 document.body.appendChild(emenu);
             }
@@ -1722,7 +1733,7 @@ TF.Merc.AI.Engineer.defaultLoadout = TF.Merc.Engineer.defaultLoadout;
 TF.Merc.AI.Medic.defaultLoadout = TF.Merc.Medic.defaultLoadout;
 TF.Merc.AI.Sniper.defaultLoadout = TF.Merc.Sniper.defaultLoadout;
 TF.Merc.AI.Spy.defaultLoadout = TF.Merc.Spy.defaultLoadout;
-TF.Weapon.weapons = [ TF.Weapon.Scattergun, TF.Weapon.RocketLauncher, TF.Weapon.Flamethrower, TF.Weapon.GrenadeLauncher, TF.Weapon.Minigun, TF.Weapon.Shotgun, TF.Weapon.SyringeGun, TF.Weapon.SniperRifle, TF.Weapon.Revolver, TF.Weapon.Shovel, TF.Weapon.Bat, TF.Weapon.Bottle, TF.Weapon.Fists, TF.Weapon.Kukri, TF.Weapon.Bonesaw, TF.Weapon.Knife, TF.Weapon.ConstructionPDA, TF.Weapon.DestructionPDA, TF.Weapon.InvisWatch, TF.Weapon.Sapper, TF.Weapon.StickyBombLauncher, TF.Weapon.FireAxe, TF.Weapon.Medigun, TF.Weapon.Pistol ];
+TF.Weapon.weapons = [ TF.Weapon.Scattergun, TF.Weapon.RocketLauncher, TF.Weapon.Flamethrower, TF.Weapon.GrenadeLauncher, TF.Weapon.Minigun, TF.Weapon.Shotgun, TF.Weapon.SyringeGun, TF.Weapon.SniperRifle, TF.Weapon.Revolver, TF.Weapon.Shovel, TF.Weapon.Bat, TF.Weapon.Bottle, TF.Weapon.Fists, TF.Weapon.Kukri, TF.Weapon.Bonesaw, TF.Weapon.Knife, TF.Weapon.ConstructionPDA, TF.Weapon.DestructionPDA, TF.Weapon.InvisWatch, TF.Weapon.Sapper, TF.Weapon.StickyBombLauncher, TF.Weapon.FireAxe, TF.Weapon.Medigun, TF.Weapon.Pistol, TF.Weapon.Something ];
 
 const canvas = document.getElementById("gameCanvas");
 
