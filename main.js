@@ -1542,6 +1542,7 @@ TF.Loadout = class {
                         width: "15%",
                         height: "30%"
                     });
+                    div.classList.add("cursor-hover");
                     div.addEventListener("click", select);
                 });
                 Object.assign(emenu.style, {
