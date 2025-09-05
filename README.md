@@ -70,7 +70,7 @@ We apologize for the wait, but we have a lot to work on, so we hope you can unde
 Accounts will have a connected:
 - E-Mail
 - Phone number (optional)
-Accounts will have the following data associated with them:
+<br>Accounts will have the following data associated with them:
 - Username
 - Display name
 - Password
