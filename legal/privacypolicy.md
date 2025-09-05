@@ -5,7 +5,9 @@ The following data is collected:
 - Phone number (optional)
 
 How is data collected?
-//
+IP address is automatically fetched when a TF Web user is initalized on a multiplayer server. (fetched through the ipify API)
+E-Mail is fetched upon signup for a TF Web account (per user input).
+Phone number is fetched upon signup for a TF Web account (if user inputs).
 
 How is my data being used?
 //
