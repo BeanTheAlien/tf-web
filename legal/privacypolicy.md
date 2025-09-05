@@ -20,17 +20,18 @@ Activity is used for analytics to determine when people play and how long people
 Weapon usage and duration of time used is for analytics to determine what weapons are considered "meta" and what weapons need balancing or shoutouts as underdogs.<br>
 Class playing and duration of time played is used for analytics to determine what classes most need attention. Classes that need updates are more likely to get them.
 
-How is my data being stored and protected?
-//
+How is my data being stored and protected?<br>
+All data will be stored on a secure server and data leaks will be addressed.
 
-Who is my data shared with?
-//
+Who is my data shared with?<br>
+Your private data is only shared with the TF Web team.<br>
+Analytics will be public, but do not show account connections.
 
 What are my rights as a user?
-//
+You can opt-out of data collection at any point by emailing explosivebearentertainment@gmail.com.
 
 Who can I contact for privacy concerns?
-//
+You can contact explosivebearentertainment@gmail.com for any reason.
 
 - What data is collected (name, email, IP address, cookies, etc.)  
 - How data is collected (forms, cookies, analytics, third-party services)  

@@ -94,10 +94,10 @@ What do each of the connected fields in your account represent?
 - Accuracy: represents the total number of shots hit to the number of shots taken in all of your games
 
 What factors determine my skill level for each class?
-Scout
+<br>Scout
 - Overall KDR
 - Accuracy
-Soldier
+<br>Soldier
 - Overall KDR
 - Accuracy
 
