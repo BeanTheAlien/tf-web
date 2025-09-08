@@ -1743,15 +1743,15 @@ class SoundEmitter {
 class Camera {}
 
 TF.Merc.MercClasses = [ TF.Merc.Scout, TF.Merc.Soldier, TF.Merc.Pyro, TF.Merc.Demoman, TF.Merc.Heavy, TF.Merc.Engineer, TF.Merc.Medic, TF.Merc.Sniper, TF.Merc.Spy ];
-TF.Merc.Scout.defaultLoadout = { "primary": TF.Weapon.Scattergun, "secondary": null, "melee": null };
+TF.Merc.Scout.defaultLoadout = { "primary": TF.Weapon.Scattergun, "secondary": TF.Weapon.Pistol, "melee": TF.Weapon.Bat };
 TF.Merc.Soldier.defaultLoadout = { "primary": TF.Weapon.RocketLauncher, "secondary": TF.Weapon.Shotgun, "melee": TF.Weapon.Shovel };
-TF.Merc.Pyro.defaultLoadout = { "primary": TF.Weapon.Flamethrower, "secondary": TF.Weapon.Shotgun, "melee": null };
-TF.Merc.Demoman.defaultLoadout = { "primary": TF.Weapon.GrenadeLauncher, "secondary": null, "melee": null };
-TF.Merc.Heavy.defaultLoadout = { "primary": TF.Weapon.Minigun, "secondary": TF.Weapon.Shotgun, "melee": null };
-TF.Merc.Engineer.defaultLoadout = { "primary": TF.Weapon.Shotgun, "secondary": null, "melee": null };
-TF.Merc.Medic.defaultLoadout = { "primary": TF.Weapon.SyringeGun, "secondary": null, "melee": null };
-TF.Merc.Sniper.defaultLoadout = { "primary": TF.Weapon.SniperRifle, "secondary": null, "melee": null };
-TF.Merc.Spy.defaultLoadout = { "primary": TF.Weapon.Revolver, "secondary": null, "melee": null };
+TF.Merc.Pyro.defaultLoadout = { "primary": TF.Weapon.Flamethrower, "secondary": TF.Weapon.Shotgun, "melee": TF.Weapon.FireAxe };
+TF.Merc.Demoman.defaultLoadout = { "primary": TF.Weapon.GrenadeLauncher, "secondary": TF.Weapon.StickyBombLauncher, "melee": TF.Weapon.Bottle };
+TF.Merc.Heavy.defaultLoadout = { "primary": TF.Weapon.Minigun, "secondary": TF.Weapon.Shotgun, "melee": TF.Weapon.Fists };
+TF.Merc.Engineer.defaultLoadout = { "primary": TF.Weapon.Shotgun, "secondary": TF.Weapon.Pistol, "melee": TF.Weapon.Wrench };
+TF.Merc.Medic.defaultLoadout = { "primary": TF.Weapon.SyringeGun, "secondary": TF.Weapon.Medigun, "melee": TF.Weapon.Bonesaw };
+TF.Merc.Sniper.defaultLoadout = { "primary": TF.Weapon.SniperRifle, "secondary": TF.Weapon.SubmachineGun, "melee": TF.Weapon.Kukri };
+TF.Merc.Spy.defaultLoadout = { "primary": TF.Weapon.Revolver, "secondary": TF.Weapon.Sapper, "melee": TF.Weapon.Knife };
 TF.Merc.AI.Scout.defaultLoadout = TF.Merc.Scout.defaultLoadout;
 TF.Merc.AI.Soldier.defaultLoadout = TF.Merc.Soldier.defaultLoadout;
 TF.Merc.AI.Pyro.defaultLoadout = TF.Merc.Pyro.defaultLoadout;
