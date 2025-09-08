@@ -461,8 +461,9 @@ TF.Weapon = class {
         this.invicon = s.invicon;
         for(const { key, value } of Object.keys(s.misc)) this[key] = value;
         /*
-        grade (unique, strange, usw)
-        comps (strangetracker, usw)
+        grade (unique, strange, usw) (TF.Weapon.Grade? constructor => name, colour)
+        comps (strangetracker, usw) (TF.Weapon.Component? constructor => name, action)
+        comps could inherit things like warpaint and unsual effects
         */
     }
     atk1() {
