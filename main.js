@@ -1506,6 +1506,12 @@ TF.Loadout = class {
                 const select = (e) => {
                     const weapon = e.currentTarget.dataset.weapon;
                     document.body.removeChild(emenu);
+                    const sl = weapon.slot;
+                    switch(sl) {
+                        case "primary": player.primary = new weapon; break;
+                        case "secondary": player.secondary = new weapon; break;
+                        case "melee": player.melee = new weapon; break;
+                    }
                 }
                 const emenu = document.createElement("div");
                 emenu.className = "ebslot";
@@ -1652,6 +1658,9 @@ class RaycastEmitter {
 class ParticleEmitter {
     constructor(s) {
         this.texture = s.texture;
+        // is this an error?
+        // doesnt get args for colour
+        // unless im using TF.Colour
         this.colour1 = new s.colour1();
         this.colour2 = new s.colour2();
         this.colourdead = new s.colourdead(); // new (colour => BABYLON.Color4)(stuff)
