@@ -1576,6 +1576,24 @@ TF.Loadout = class {
             };
             execs[id]();
         }
+        // [[slotprimary, player.primary], [slotsecondary, player.secondary], [slotmelee, player.melee]].forEach(s => {
+        //     const img = document.createElement("img");
+        //     img.src = s[1].invicon;
+        //     const p = document.createElement("p");
+        //     p.textContent = s[1].name;
+        //     const br = document.createElement("br");
+        //     s[0].appendChild(img);
+        //     s[0].appendChild(br);
+        //     s[0].appendChild(p);
+        //     Object.assign(img.style, {
+        //         width: "40%",
+        //         height: "40%",
+        //         padding: "15px"
+        //     });
+        //     Object.assign(p.style, {
+        //         fontSize: "12px"
+        //     });
+        // });
         slotprimary.innerHTML = player.primary.name;
         slotsecondary.innerHTML = player.secondary.name;
         slotmelee.innerHTML = player.melee.name;
